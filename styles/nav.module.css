@@ -5,7 +5,8 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 0 2vw;
+    /* background-color: var(--gray); */
     z-index: 10;
 }
 .logo{
@@ -25,4 +26,8 @@
 .linkContainer li {
     padding: 5px 10px;
     margin: 0 5px;
+}
+
+.linkContainer a.active {
+    border-bottom: 3px solid var(--mattflix-red);
 }

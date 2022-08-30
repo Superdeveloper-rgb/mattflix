@@ -1,0 +1,33 @@
+.header {
+  position: relative;
+  display: flex;
+  padding: 40px;
+  width: 100vw;
+  aspect-ratio: 16 / 9;
+  flex-flow: column;
+  justify-content: end;
+  font-family: MattflixSans;
+  background-color: var(--gray);
+  box-shadow: 100px -100px 200px black inset;
+  background-image: url("/OG_IMG.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.title {
+  font-size: 5vw;  
+  margin: 0;
+}
+.description {
+    font-size: 15px;
+}
+
+/* Latge screens */
+@media only screen and (min-width: 1200px) {
+  .header {
+    height: 50vw;
+  }
+  .title {
+    font-size: 3vw;
+  }
+}

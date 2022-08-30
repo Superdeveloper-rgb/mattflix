@@ -1,0 +1,18 @@
+
+
+.shelf {
+    width: 100vw;
+    display: grid;
+    grid-auto-columns: 150px;
+    grid-auto-flow: column;
+    column-gap: var(--spacing);
+    margin: 20px 0;
+    padding-left: var(--spacing);
+    overflow-x: scroll;
+    --spacing: 40px;
+
+}
+.contentCard {
+    width: 100%;
+    overflow: hidden;
+}
