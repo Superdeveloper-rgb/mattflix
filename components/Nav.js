@@ -4,11 +4,13 @@ import { useRouter } from "next/router"
 import { useState, useEffect } from "react";
 
 export default function Nav() {
+    const {pathname} = useRouter();
+
     const [scroll, setScroll] = useState(0);
     const [transparency, setTransparency] = useState();
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
+        window.addEventListener("scroll", handleScroll);
         return ()=>{window.removeEventListener("scroll", handleScroll)}
     });
     function handleScroll() {
@@ -16,7 +18,7 @@ export default function Nav() {
     }
     useEffect(() => {
         let transparencyVar = scroll / 200;
-        if (transparencyVar < 1) setTransparency(transparencyVar);
+        (transparencyVar < 1) ? setTransparency(transparencyVar) : setTransparency(1);
     }, [scroll]);
 
 
@@ -28,7 +30,7 @@ export default function Nav() {
             <ol className={styles.linkContainer}>
                 <Navlink href="/" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New</Navlink>
-                <Navlink href="/originals" nextLink>Originals</Navlink>
+                <Navlink href="/originals" >Originals</Navlink>
             </ol>
         </nav>
     )

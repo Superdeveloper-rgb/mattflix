@@ -5,7 +5,7 @@
   width: 100vw;
   aspect-ratio: 16 / 9;
   flex-flow: column;
-  justify-content: end;
+  justify-content: flex-end;
   font-family: MattflixSans;
   background-color: var(--gray);
   box-shadow: 100px -100px 200px black inset;
@@ -20,6 +20,34 @@
 }
 .description {
     font-size: 15px;
+}
+.watchLink, .infoLink {
+  display: flex;
+  width: 75px;
+  height: 30px;
+  justify-content: center;
+  border-radius: 5px;
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.watchLink {
+  background-color: var(--mattflix-red);
+  background-image: url('/icons/play-white.svg');
+  margin-right: 10px;
+}
+.infoLink {
+  background-color: white;
+  background-image: url('/icons/info.svg');
+}
+.links {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.playBtn {
+  display: inline-block;
+  width: 15px;
 }
 
 /* Latge screens */
