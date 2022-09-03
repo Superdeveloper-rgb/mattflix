@@ -1,0 +1,41 @@
+.header {
+  position: relative;
+  display: flex;
+  padding: 40px;
+  width: 100vw;
+  aspect-ratio: 16 / 9;
+  flex-flow: column;
+  justify-content: flex-end;
+  font-family: MattflixSans;
+  background-color: var(--gray);
+  box-shadow: 100px -100px 200px black inset;
+  background-image: url("/OG_IMG.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.banner {
+  width: 100%;
+  height: 40vw;
+  display: grid;
+  place-items: center;
+  font-size: 5vw;
+  font-family: 'Megrim', cursive;
+  background-position: center;
+  background-size: cover;
+  background-image: url("/chamber.jpg");
+}
+
+
+/* Latge screens */
+@media only screen and (min-width: 1200px) {
+  .header {
+    height: 50vw;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .header {
+    aspect-ratio: 9 / 16;
+    /* height: 70vh; */
+  }
+}

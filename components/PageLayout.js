@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 export default function PageLayout({ children }) {
     const router = useRouter();
-    const padding = router.pathname === '/' ? '' : '80px'
+    const padding = router.pathname === '/' ? undefined : '80px'
     return (
         <>
             <Nav />

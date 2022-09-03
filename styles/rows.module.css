@@ -1,91 +1,124 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&display=swap'); */
 
-
+/* Regular Shelves */
 .shelf {
-    width: 100vw;
-    display: grid;
-    color: var(--text);
-    grid-auto-columns: var(--card-width);
-    grid-auto-rows: var(--card-height);
-    grid-auto-flow: column;
-    column-gap: var(--spacing);
-    margin: 20px 0;
-    padding-left: var(--spacing);
-    overflow-x: scroll;
-    --spacing: 40px;
+  width: 100vw;
+  display: grid;
+  color: var(--text);
+  grid-auto-columns: var(--card-width);
+  grid-auto-rows: var(--card-height);
+  grid-auto-flow: column;
+  column-gap: var(--spacing);
+  margin: 20px 0;
+  padding-left: var(--spacing);
+  overflow-x: scroll;
+  --spacing: 40px;
 }
-.shelf  .contentCard {
-    width: 100%;
-    overflow: hidden;
-}
-
-.contentCard  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-:matches(.spotlight, .spotlightSlider) > .contentCard {
-    height: 100%;
-    aspect-ratio: var(--card-aspect-ratio);
+.shelf .contentCard {
+  width: 100%;
+  overflow: hidden;
 }
 
-.spotlight{
-    width: 100%;
-    height: 40vw;
-    padding: 40px;
-    display: flex;
-    flex-flow: row nowrap;
-    /* background-image: url(/OG_IMG.png); */
+.contentCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
 }
 
-.spotlight > .textWrapper {
-    margin-left: 50px;
+/* feature block */
+
+:matches(.feature, .thumbnailSlider) > .contentCard {
+  height: 100%;
+  aspect-ratio: var(--card-aspect-ratio);
 }
 
-.banner {
-    width: 100%;
-    height: 40vw;
-    display: grid;
-    place-items: center;
-    font-size: 5vw;
-    font-family: 'Megrim', cursive;
-    background-position: center;
-    background-size: cover;
-    background-image: url("/chamber.jpg");
+.feature {
+  width: 100%;
+  height: 40vw;
+  padding: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.feature > .contentCard {
+  margin-right: 50px;
 }
 
-.spotlightSlider {
-    width: 100%;
-    height: 40vw;
-    max-height: 400px;
-    padding: 40px;
-    display: flex;
-    flex-flow: row nowrap;
-    overflow-x: scroll;
+/* full-width feature */
+.largeFeature {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 80vh;
+  padding: 40px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 
 }
+.largeFeature .contentCard::before{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: 100px -100px 200px rgba(22, 22, 22, 0.9) inset;
 
-.spotlightSlider .contentCard {
-    position: relative;
-    height: 100%;
-    position: relative;
-    aspect-ratio: 16 / 9;
+}
+.largeFeature .contentCard {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.largeFeature > div:not(.contentCard) {
+  position: absolute;
+  align-self: flex-end;
+  margin: 40px;
+}
+
+/* thumbnail slider */
+
+.thumbnailSlider {
+  width: 100%;
+  height: 40vw;
+  max-height: 400px;
+  padding: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.thumbnailSlider .contentCard {
+  position: relative;
+  height: 100%;
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.thumbnailSlider .contentCard::before {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-image: url("/icons/play-circle.svg");
+  background-repeat: no-repeat;
+  background-size: 10%;
+  background-position: center;
+}
+.thumbnailSlider .contentCard img {
+  border-radius: 20px;
+}
+.thumbnailSlider div {
     margin-right: 50px;
+}
 
-}
-.spotlightSlider .contentCard::before {
-    content: '';
-    position: absolute;
-    display: block;
-    height: 100%;
-    width: 100%;
-    background-image: url('/icons/play-circle.svg');
-    background-repeat: no-repeat;
-    background-size: 10%;
-    background-position: center;
-}
-.spotlightSlider .contentCard img {
-    border-radius: 20px;
-}
+@media only screen and (max-width: 550px) {
+    .spotlight, .spotlightSlider {
+      padding: 20px;
+    }
+  }

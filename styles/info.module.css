@@ -1,0 +1,54 @@
+.textWrapper {
+  max-height: 100%;
+}
+
+.title {
+  font-size: 5vw;
+  margin: 0;
+}
+.description {
+  font-size: 15px;
+}
+.watchLink,
+.infoLink {
+  display: flex;
+  width: 75px;
+  height: 30px;
+  justify-content: center;
+  border-radius: 5px;
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.watchLink {
+  background-color: var(--mattflix-red);
+  background-image: url("/icons/play-white.svg");
+  margin-right: 10px;
+}
+.infoLink {
+  background-color: white;
+  background-image: url("/icons/info.svg");
+}
+.links {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.responsive{
+  display: block;
+}
+
+/* Latge screens */
+@media only screen and (min-width: 1200px) {
+  .title {
+    font-size: 3vw;
+  }
+}
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  .description.responsive {
+    display: none;
+  }
+  .links{
+    margin-top: 20px;
+  }
+}
