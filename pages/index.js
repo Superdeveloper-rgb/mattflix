@@ -10,15 +10,10 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function Home(props) {
-  if (props.error) {
-    return(
-      <p style={{position: "fixed", top: "50%", left: "50", transform: "translate(-50%, -50%)"}}>Error 500 - server error</p>
-    )
-  }
-
+  // for responsive description - probably wanna make this a custom hook
+  const featuredTitle = props.titles[0];
   let [featureDesc, setDesc] = useState();
   let [screenwidth, setScreenwidth] = useState();
-  const feature = 1;
   useEffect(()=>{
     window.addEventListener("resize", handleResize);
     return ()=> window.removeEventListener("resize", handleResize)
@@ -27,7 +22,7 @@ export default function Home(props) {
     setScreenwidth(window.innerWidth);
   }
   useEffect(()=>{
-    setDesc((screenwidth > 800 ) ? props.titles[feature].summary : props.titles[feature].short);
+    setDesc((screenwidth > 800 ) ? featuredTitle.summary : featuredTitle.short);
   }, [screenwidth])
   return (
     <>
@@ -35,10 +30,9 @@ export default function Home(props) {
         <title>Home - Mattflix</title>
       </Head>
 
-      <header className={banners.header} style={{backgroundImage: `url(${props.titles[feature].banner_url})`}}>
-        <Info title={props.titles[feature].title} description={featureDesc} cid={props.titles[feature].slug} links/>
+      <header className={banners.header} style={{backgroundImage: `url(${featuredTitle.banner_url})`}}>
+        <Info title={featuredTitle.title} description={featureDesc} cid={featuredTitle.slug} links/>
       </header>
-      <iframe src="http://localhost:3000/autoplay"/>
 
       <section className={rows.shelf}>
         {props.titles.map((title)=>{

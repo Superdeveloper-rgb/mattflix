@@ -6,6 +6,7 @@ import styles from "../../styles/videoPlayer.module.css";
 export default function watch(props) {
     let [classes, setClasses] = useState(styles.video);
     useEffect(() => {
+        // add "in" class on page load
         setClasses([styles.video, styles.in].join(' '));
     })
 

@@ -16,18 +16,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
-
-
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext)
-//   const req = appContext.ctx.req
-
-//   return {
-//     pageProps: {
-//       ...appProps.pageProps,
-//       host: req?.headers['host'],
-//     },
-//   }
-// }
-

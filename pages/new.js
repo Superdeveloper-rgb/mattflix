@@ -1,8 +1,8 @@
 import rows from '../styles/rows.module.css'
 import Head from 'next/head';
-import ContentCard, { Placeholder } from '../components/ContentCard';
 import Info from '../components/Info';
 import FeatureRow from '../components/FeatureRow';
+import ContentCard, { Placeholder } from '../components/ContentCard';
 import prisma from '../lib/prisma';
 import { makeSerializable } from '../lib/utils';
 
@@ -16,7 +16,6 @@ export default function newPage(props) {
       <Info title={props.titles[0].title} description={props.titles[0].summary} links />
     </section>
     <section className={rows.thumbnailSlider}>
-
       <ContentCard default />
       <ContentCard default />
       <ContentCard default />
