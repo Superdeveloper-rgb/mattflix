@@ -13,7 +13,7 @@ export default function newPage(props) {
     </Head>
     <section className={rows.largeFeature}>
       <ContentCard src={props.titles[0].banner_url} />
-      <Info title={props.titles[0].title} description={props.titles[0].summary} links />
+      <Info title={props.titles[0].title} description={props.titles[0].summary} cid={props.titles[0].slug} links />
     </section>
     <section className={rows.thumbnailSlider}>
       <ContentCard default />
