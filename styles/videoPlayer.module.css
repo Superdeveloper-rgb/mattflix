@@ -20,15 +20,6 @@
   /* transform: scale(1); */
 }
 
-.autoplayer {
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 80vh;
-  padding: 40px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
 .loader {
   position: fixed;
   top: 50%;
