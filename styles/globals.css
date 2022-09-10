@@ -17,6 +17,14 @@ a {
   box-sizing: border-box;
 }
 
+iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  position: absolute;
+  top: 0;
+}
+
 @font-face {
   font-family: MattflixSans;
   src: url('../public/fonts/NetflixSans_W_Rg.woff2');

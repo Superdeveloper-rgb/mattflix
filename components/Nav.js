@@ -4,10 +4,9 @@ import { useRouter } from "next/router"
 import { useState, useEffect } from "react";
 
 export default function Nav() {
-    const {pathname} = useRouter();
 
     const [scroll, setScroll] = useState(0);
-    const [transparency, setTransparency] = useState();
+    const [transparency, setTransparency] = useState(true);
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -17,15 +16,12 @@ export default function Nav() {
         setScroll(window.scrollY);
     }
     useEffect(() => {
-        let transparencyVar = scroll / 200;
-        (transparencyVar < 1) ? setTransparency(transparencyVar) : setTransparency(1);
+        (scroll > 0) ? setTransparency(false) : setTransparency(true);
     }, [scroll]);
 
 
     return (
-        <nav className={styles.mainNav} style={{
-            backgroundColor: `rgba(22, 22, 22, ${transparency})`
-        }}>
+        <nav className={transparency ? styles.mainNav : [styles.mainNav, styles.scrolled].join(" ")}>
             <a href="/"><img src="/mattflix.png" className={styles.logo} /></a>
             <ol className={styles.linkContainer}>
                 <Navlink href="/" nextLink>Browse</Navlink>

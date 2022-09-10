@@ -12,6 +12,7 @@
   background-image: url("/OG_IMG.png");
   background-size: cover;
   background-position: center;
+  overflow-y: hidden;
 }
 
 .banner {

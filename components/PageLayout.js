@@ -6,9 +6,8 @@ export default function PageLayout({ children }) {
     const padding = router.pathname === '/' ? undefined : '80px'
     return (
         <>
-            <Nav />
+            {['/[slug]/watch', '/autoplay'].includes(router.pathname)  ? <></> : <Nav />}
             <main style={{paddingTop: padding}}>{children}</main>
-            {/* <Footer /> */}
         </>
     )
 }

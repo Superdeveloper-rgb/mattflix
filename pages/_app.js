@@ -1,10 +1,8 @@
 import '../styles/globals.css'
 import Head from 'next/head'
 import PageLayout from '../components/PageLayout'
-import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }) {
-  const { pathname } = useRouter();
   return (<>
     <Head>
       <meta name="description" content="Matt's personal streaming platform for all his incredible content." />

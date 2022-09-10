@@ -5,9 +5,12 @@
 .title {
   font-size: 5vw;
   margin: 0;
+  transition: opacity 1s;
 }
 .description {
   font-size: 15px;
+  max-width: 50%;
+  transition: opacity 1s;
 }
 .watchLink,
 .infoLink {
@@ -19,6 +22,9 @@
   background-size: 20%;
   background-repeat: no-repeat;
   background-position: center;
+  border: none;
+  cursor: pointer;
+  transition: opacity 1s;
 }
 .watchLink {
   background-color: var(--mattflix-red);
