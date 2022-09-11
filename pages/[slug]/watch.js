@@ -19,6 +19,7 @@ export default function watch(props) {
 export async function getServerSideProps(context) {
     const title = await prisma.content.findUnique({
         where: { slug: context.query.slug },
+        select: {bunny_id: true}
     })
     return (
         { props: makeSerializable(title) }

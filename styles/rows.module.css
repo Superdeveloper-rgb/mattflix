@@ -47,6 +47,14 @@
 .feature > .contentCard {
   margin-right: 50px;
 }
+@media only screen and (max-width: 400px) {
+  .feature {
+    height: 50vh;
+    display: flex;
+    flex-flow: column;
+  }
+  
+}
 
 /* full-width feature */
 .largeFeature {

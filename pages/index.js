@@ -11,56 +11,75 @@ import { useEffect, useState } from 'react'
 
 export default function Home(props) {
   // for responsive description - probably wanna make this a custom hook
-  const featuredTitle = props.titles[1];
+  let [rowLimit, setRowLimit] = useState();
   let [featureDesc, setDesc] = useState();
   let [screenwidth, setScreenwidth] = useState();
-  useEffect(()=>{
+  useEffect(() => {
+    handleResize();
     window.addEventListener("resize", handleResize);
-    return ()=> window.removeEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
   })
   function handleResize() {
     setScreenwidth(window.innerWidth);
   }
-  useEffect(()=>{
-    setDesc((screenwidth > 800 ) ? featuredTitle.summary : featuredTitle.short);
+  useEffect(() => {
+    setDesc((screenwidth > 800) ? featuredTitle.summary : featuredTitle.short);
+    setRowLimit(Math.floor(screenwidth / 150));
   }, [screenwidth])
+
+  const featuredTitle = props.titles[props.featuredTitle];
+  const featuredRow = props.titles[rowLimit * 2];
   return (
     <>
       <Head>
         <title>Home - Mattflix</title>
       </Head>
 
-      <header className={banners.header} style={{backgroundImage: `url(${featuredTitle.banner_url})`}}>
-        <Info title={featuredTitle.title} description={featureDesc} cid={featuredTitle.slug} links/>
+      <header className={banners.header} style={{ backgroundImage: `url(${featuredTitle.banner_url})` }}>
+        <Info title={featuredTitle.title} description={featureDesc} cid={featuredTitle.slug} links />
       </header>
 
       <section className={rows.shelf}>
-        {props.titles.map((title)=>{
-          return <Link href={title.slug}><a><ContentCard src={title.poster_url}/></a></Link>
+        {props.titles.slice(0, (rowLimit)).map((title) => {
+          return <Link href={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
         })}
       </section>
-      <FeatureRow title="title one" description="description one" />
-      <section className={rows.largeFeature}>
-        <ContentCard src="/chamber.jpg" />
-        <Info title="The Titanic" description="a love story" links cid="Titanic"/>
-      </section>
-      <FeatureRow title="title two" description="description two"/>
-      <Placeholder length={3}/>
 
+      <section className={rows.shelf}>
+        {props.titles.slice((rowLimit), (rowLimit * 2)).map((title) => {
+          return <Link href={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
+        })}
+      </section>
+
+
+      {featuredRow &&
+        <section className={rows.largeFeature}>
+          <ContentCard src={featuredRow.banner_url} />
+          <Info title={featuredRow.title} description={(screenwidth < 800) ? featuredRow.short : featuredRow.summary} links cid={featuredRow.slug} />
+        </section>}
+
+      <section className={rows.shelf}>
+        {props.titles.slice((rowLimit * 3), (rowLimit * 4)).map((title) => {
+          return <Link href={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
+        })}
+      </section>
     </>
   )
 }
 
 
-export async function getServerSideProps(){
+export async function getServerSideProps() {
   try {
     const titles = await prisma.content.findMany();
+    const {_count} = await prisma.content.aggregate({ _count: true })
     return {
       props: {
-        titles: makeSerializable(titles)}
+        titles: makeSerializable(titles),
+        featuredTitle: Math.floor(Math.random() * _count)
+      }
     }
   } catch (error) {
-    return {props: {error: makeSerializable(error)}}
+    return { props: { error: makeSerializable(error) } }
   }
 }
 
