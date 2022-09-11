@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home(props) {
   // for responsive description - probably wanna make this a custom hook
-  const featuredTitle = props.titles[0];
+  const featuredTitle = props.titles[1];
   let [featureDesc, setDesc] = useState();
   let [screenwidth, setScreenwidth] = useState();
   useEffect(()=>{

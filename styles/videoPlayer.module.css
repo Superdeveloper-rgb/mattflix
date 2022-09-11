@@ -35,6 +35,12 @@
   animation-iteration-count: infinite;
 }
 
+.iframeContainer {
+  position: relative;
+  height: 100vh;
+  max-height: -webkit-fill-available;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

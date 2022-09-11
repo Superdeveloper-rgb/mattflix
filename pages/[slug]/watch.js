@@ -4,15 +4,15 @@ import { makeSerializable } from "../../lib/utils";
 import styles from "../../styles/videoPlayer.module.css";
 
 export default function watch(props) {
+    console.log(props)
     let [classes, setClasses] = useState(styles.video);
     useEffect(() => {
         // add "in" class on page load
         setClasses([styles.video, styles.in].join(' '));
     })
-
     return (<>
         <div className={styles.loader}></div>
-        <video src={props.play_url} autoPlay playsInline controls className={classes} />
+        <div className={styles.iframeContainer}><iframe src={`https://iframe.mediadelivery.net/embed/59441/${props.bunny_id}?autoplay=true`} loading="lazy" style={{border: "none", position: "absolute", top: 0, height: "100%", width: "100%"}} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowFullScreen="true"></iframe></div>
     </>)
 }
 

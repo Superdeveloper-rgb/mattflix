@@ -20,6 +20,7 @@ model content {
   public      Boolean?  @default(false)
   created_at  DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
   slug        String    @unique @default(dbgenerated("((regexp_replace(regexp_replace(title, '[^A-Za-z0-9\\s-]+'::text, ''::text, 'g'::text), '[\\s-]+'::text, '-'::text, 'g'::text) || '-'::text) || (id)::text)"))
+  bunny_id    String?
 
   @@id([id, slug])
 }
