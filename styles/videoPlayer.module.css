@@ -1,23 +1,19 @@
 .video {
   width: 100vw;
   height: 100vh;
-  height: -moz-available;
-  height: -webkit-fill-available;
-  height: fill-available;
-  position: fixed;
-  top: 0;
-  left: 0;
+  max-height: -webkit-fill-available;
   opacity: 0;
   transition: opacity 1s;
   transition-delay: 500ms;
-  pointer-events: none;
   /* transform: scale(0.9); */
 }
 .in {
-  pointer-events: all;
   opacity: 1;
   display: block !important;
   /* transform: scale(1); */
+}
+.nopointerevents {
+  pointer-events: none !important;
 }
 
 .loader {
@@ -34,7 +30,19 @@
   animation-timing-function: cubic-bezier(0.28, 0.01, 0.71, 0.97);
   animation-iteration-count: infinite;
 }
-
+.backArrow {
+  position: fixed;
+  cursor: pointer;
+  top: 3%;
+  left: 3%;
+  z-index: 5;
+  opacity: 1;
+  transition: transform 500ms, opacity 1s;
+}
+.backArrow.hidden{opacity: 0;}
+.backArrow:hover {
+  transform: scale(1.2);
+}
 .iframeContainer {
   position: relative;
   height: 100vh;
