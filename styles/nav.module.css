@@ -13,7 +13,12 @@
 .mainNav.scrolled {
     background-color: var(--gray);
 }
-
+.login {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: var(--mattflix-red);
+}
 .logo{
     height: 40px;
     width: auto;

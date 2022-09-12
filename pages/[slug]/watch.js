@@ -1,18 +1,35 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import prisma from "../../lib/prisma";
 import { makeSerializable } from "../../lib/utils";
 import styles from "../../styles/videoPlayer.module.css";
 
 export default function watch(props) {
-    console.log(props)
+    const router = useRouter()
     let [classes, setClasses] = useState(styles.video);
-    useEffect(() => {
-        // add "in" class on page load
-        setClasses([styles.video, styles.in].join(' '));
-    })
+    let [backBtnClass, setBackBtnClass] = useState(["fas fa-arrow-left", styles.backArrow].join(' '));
+    useEffect(()=>setClasses([styles.video, styles.in].join(' ')), []) // add "in" class on page load
+    // useEffect(() => {
+    //     let hideTimeout;
+    //     function showBackBtn(){
+    //         if(hideTimeout) clearTimeout(hideTimeout);
+    //         setBackBtnClass(["fas fa-arrow-left", styles.backArrow].join(' '))
+    //         hideTimeout = setTimeout(hideBackBtn, 2000);
+    //         setClasses([styles.video, styles.in].join(' '));
+    //     }
+    //     function hideBackBtn(){
+    //         setBackBtnClass(["fas fa-arrow-left", styles.backArrow, styles.hidden].join(' '))
+    //         setClasses([styles.video, styles.in, styles.nopointerevents].join(' '));
+    //     }
+    //     window.addEventListener("mouseout", hideBackBtn)
+    //     window.addEventListener("mouseover", showBackBtn)
+    //     window.addEventListener("mousemove", showBackBtn)
+    //     window.addEventListener("click", showBackBtn)
+    // })
     return (<>
+        <span className={styles.backArrow} onClick={()=>router.back()}><i className="fas fa-arrow-left"/>&nbsp;Back</span>
         <div className={styles.loader}></div>
-        <div className={styles.iframeContainer}><iframe src={`https://iframe.mediadelivery.net/embed/59441/${props.bunny_id}?autoplay=true`} loading="lazy" style={{border: "none", position: "absolute", top: 0, height: "100%", width: "100%"}} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowFullScreen="true"></iframe></div>
+        <div className={classes}><iframe src={`https://iframe.mediadelivery.net/embed/${process.env.bunny_library_id}/${props.bunny_id}?autoplay=true`} loading="lazy" style={{border: "none", position: "absolute", top: 0, height: "100%", width: "100%"}} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowFullScreen={true}></iframe></div>
     </>)
 }
 

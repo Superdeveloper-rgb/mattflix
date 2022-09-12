@@ -8,7 +8,7 @@
   justify-content: flex-end;
   font-family: MattflixSans;
   background-color: var(--gray);
-  box-shadow: 100px -100px 200px black inset;
+  box-shadow: 100px -100px 200px var(--gray) inset;
   background-image: url("/OG_IMG.png");
   background-size: cover;
   background-position: center;

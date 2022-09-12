@@ -53,7 +53,6 @@
     display: flex;
     flex-flow: column;
   }
-  
 }
 
 /* full-width feature */
@@ -65,16 +64,14 @@
   padding: 40px;
   overflow-x: scroll;
   overflow-y: hidden;
-
 }
-.largeFeature .contentCard::before{
-  content: '';
+.largeFeature .contentCard::before {
+  content: "";
   display: block;
   position: absolute;
   width: 100%;
   height: 100%;
   box-shadow: 100px -100px 200px rgba(22, 22, 22, 0.9) inset;
-
 }
 .largeFeature .contentCard {
   width: 100%;
@@ -82,20 +79,6 @@
   aspect-ratio: 16 / 9;
   border-radius: 20px;
   overflow: hidden;
-  transition: all 1s;
-}
-.zoom .contentCard {
-  transform: scale(1.2);
-  opacity: 0;
-}
-.zoom :matches(h1, p, button) {
-  opacity: 0;
-}
-
-.largeFeature > div:not(.contentCard) {
-  position: absolute;
-  align-self: flex-end;
-  margin: 40px;
 }
 
 /* thumbnail slider */
@@ -133,11 +116,79 @@
   border-radius: 20px;
 }
 .thumbnailSlider div {
-    margin-right: 50px;
+  margin-right: 50px;
 }
 
-@media only screen and (max-width: 550px) {
-    .spotlight, .spotlightSlider {
-      padding: 20px;
-    }
+/* on info page */
+.infoBanner {
+  width: 100vw;
+  padding-top: 80px;
+  display: flex;
+  backdrop-filter: blur(10px) brightness(80%);
+  background-color: transparent;
+}
+.infoBanner div:nth-child(2) {
+  margin: 40px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+.infoBanner .contentCard {
+  display: block;
+  margin: 40px;
+  aspect-ratio: var(--card-aspect-ratio);
+  height: 45vw;
+  max-height: 50vh;
+  transition: transform 1s, opacity 1s;
+}
+.infoBanner .contentCard img {
+  width: 100%;
+  height: 100%;
+}
+.infoBanner.zoom {
+  animation-name: zoomba;
+  animation-duration: 1s;
+  animation-delay: 500ms;
+  animation-fill-mode: both;
+}
+.zoom .contentCard {
+  transform: scale(0.8);
+  opacity: 0;
+}
+.zoom :matches(h1, p, button) {
+  opacity: 0;
+}
+
+.largeFeature > div:not(.contentCard) {
+  position: absolute;
+  align-self: flex-end;
+  margin: 40px;
+}
+@keyframes zoomba {
+  0% {
+    backdrop-filter: blur(10px) brightness(80%);
+    min-height: 50vh;
   }
+  100% {
+    backdrop-filter: blur(0px) brightness(0%);
+    min-height: 100vh;
+  }
+}
+@media screen and (max-width: 550px) {
+  .infoBanner {
+    flex-flow: column;
+  }
+  .infoBanner .contentCard {
+    max-height: 70vh;
+    height: initial;
+    margin: 40px auto;
+  }
+  .infoBanner div:nth-child(2) {
+    margin: 30px auto;
+    width: 283px;
+  }
+  .spotlight,
+  .spotlightSlider {
+    padding: 20px;
+  }
+}

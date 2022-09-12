@@ -5,30 +5,19 @@ import Info from '../components/Info'
 import FeatureRow from '../components/FeatureRow'
 import ContentCard, { Placeholder } from '../components/ContentCard'
 import prisma from '../lib/prisma';
-import { makeSerializable } from '../lib/utils'
+import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import supabase from '../lib/supabaseClient'
 
 export default function Home(props) {
-  // for responsive description - probably wanna make this a custom hook
-  let [rowLimit, setRowLimit] = useState();
-  let [featureDesc, setDesc] = useState();
-  let [screenwidth, setScreenwidth] = useState();
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize)
-  })
-  function handleResize() {
-    setScreenwidth(window.innerWidth);
-  }
-  useEffect(() => {
-    setDesc((screenwidth > 800) ? featuredTitle.summary : featuredTitle.short);
-    setRowLimit(Math.floor(screenwidth / 150));
-  }, [screenwidth])
-
-  const featuredTitle = props.titles[props.featuredTitle];
+  let [rowLimit, setRowLimit] = useState(10);
+  let [width] = useScreenSize();
+  useEffect(()=>setRowLimit(Math.floor(width/150)))
+  
   const featuredRow = props.titles[rowLimit * 2];
+  const featuredTitle = props.titles[props.featuredTitle];
+  let featureDesc = useResponsiveDescription(featuredTitle);
   return (
     <>
       <Head>
@@ -41,7 +30,7 @@ export default function Home(props) {
 
       <section className={rows.shelf}>
         {props.titles.slice(0, (rowLimit)).map((title) => {
-          return <Link href={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
+          return <Link href={title.slug} key={title.id}><a><ContentCard src={title.poster_url} /></a></Link>
         })}
       </section>
 
@@ -55,7 +44,7 @@ export default function Home(props) {
       {featuredRow &&
         <section className={rows.largeFeature}>
           <ContentCard src={featuredRow.banner_url} />
-          <Info title={featuredRow.title} description={(screenwidth < 800) ? featuredRow.short : featuredRow.summary} links cid={featuredRow.slug} />
+          <Info title={featuredRow.title} description={(width < 800) ? featuredRow.short : featuredRow.summary} links cid={featuredRow.slug} />
         </section>}
 
       <section className={rows.shelf}>
@@ -70,12 +59,11 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   try {
-    const titles = await prisma.content.findMany();
-    const {_count} = await prisma.content.aggregate({ _count: true })
+    const titles = await prisma.content.findMany({where: {public: true}});
     return {
       props: {
         titles: makeSerializable(titles),
-        featuredTitle: Math.floor(Math.random() * _count)
+        featuredTitle: Math.floor(Math.random() * (titles.length - 1))
       }
     }
   } catch (error) {

@@ -2,9 +2,10 @@ import styles from "../styles/nav.module.css"
 import Link from "next/link";
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react";
+import { useAuth } from "../lib/utils";
 
 export default function Nav() {
-
+    const [user] = useAuth();
     const [scroll, setScroll] = useState(0);
     const [transparency, setTransparency] = useState(true);
 
@@ -26,7 +27,8 @@ export default function Nav() {
             <ol className={styles.linkContainer}>
                 <Navlink href="/" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New</Navlink>
-                <Navlink href="/originals" >Originals</Navlink>
+                {!user && <li><Link href={"/login"}><a className={styles.login}>Login</a></Link></li>}
+                {user && <Navlink href="/profile" nextLink>Profile</Navlink>}
             </ol>
         </nav>
     )

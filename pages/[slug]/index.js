@@ -15,17 +15,19 @@ export default function detailsPage(props) {
         animate(true);
         setTimeout(() => {
             router.push(`${router.asPath}/watch`)
-        }, 300);
+        }, 1500);
     }
     return (<>
-        <section className={animated ? [rows.largeFeature, rows.zoom].join(' ') : rows.largeFeature}>
-            <ContentCard src={props.banner_url} />
-            <div className={infoStyles.textWrapper}>
-                <h1 className={infoStyles.title}>{props.title}</h1>
-                <p className={infoStyles.description}>{props.summary}</p>
-                <button onClick={playVid} className={infoStyles.watchLink}></button>
+        <section style={{backgroundImage: `url(${props.banner_url})`, backgroundSize: "cover", backgroundPosition: "center", }} >
+            <div className={animated ? [rows.infoBanner, rows.zoom].join(' ') : rows.infoBanner}>
+                <ContentCard src={props.poster_url} />
+                <div className={infoStyles.textWrapper}>
+                    <h1 className={infoStyles.title}>{props.title}</h1>
+                    <p className={infoStyles.description}>{props.summary}</p>
+                    <button onClick={playVid} className={infoStyles.watchLink}></button>
+                </div>
+                <video style={{ display: "none" }} ref={player} />
             </div>
-            <video style={{ display: "none" }} ref={player} />
         </section>
 
         <h1 className={rows.rowTitle}>Related</h1>
@@ -48,7 +50,8 @@ export async function getServerSideProps(context) {
             title: true,
             summary: true,
             created_at: true,
-            banner_url: true
+            banner_url: true,
+            poster_url: true
         }
     })
     return ({

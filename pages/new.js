@@ -38,6 +38,7 @@ export default function newPage(props) {
 export async function getServerSideProps() {
   try {
     const titles = await prisma.content.findMany({
+      where: {public: true},
       orderBy: {
         created_at: "desc"
       }
