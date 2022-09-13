@@ -9,7 +9,6 @@
   font-family: MattflixSans;
   background-color: var(--gray);
   box-shadow: 100px -100px 200px var(--gray) inset;
-  background-image: url("/OG_IMG.png");
   background-size: cover;
   background-position: center;
   overflow-y: hidden;
@@ -26,7 +25,13 @@
   background-size: cover;
   background-image: url("/chamber.jpg");
 }
-
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgb(22,22,22);
+  background: linear-gradient(30deg, rgba(22,22,22,1) 0%, rgba(0,0,0,0) 80%);
+}
 
 /* Latge screens */
 @media only screen and (min-width: 1200px) {

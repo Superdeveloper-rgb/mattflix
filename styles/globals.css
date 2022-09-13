@@ -30,6 +30,7 @@ a {
 
 :root {
   --gray: rgb(22, 22, 22);
+  --light-gray: rgb(50, 50, 50);
   --theme-color: rgb(147, 42, 179);
   --mattflix-red: rgb(202, 53, 52);
   --text: rgb(210, 210, 210);

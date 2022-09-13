@@ -1,5 +1,6 @@
 .textWrapper {
   max-height: 100%;
+  z-index: 1; /* in front of vignette */
 }
 
 .title {

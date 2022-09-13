@@ -145,12 +145,6 @@
   width: 100%;
   height: 100%;
 }
-.infoBanner.zoom {
-  animation-name: zoomba;
-  animation-duration: 1s;
-  animation-delay: 500ms;
-  animation-fill-mode: both;
-}
 .zoom .contentCard {
   transform: scale(0.8);
   opacity: 0;
@@ -164,10 +158,20 @@
   align-self: flex-end;
   margin: 40px;
 }
+.infoBanner.zoom {
+  animation-name: zoomba;
+  animation-duration: 1s;
+  animation-delay: 500ms;
+  animation-fill-mode: both;
+}
 @keyframes zoomba {
   0% {
     backdrop-filter: blur(10px) brightness(80%);
     min-height: 50vh;
+  }
+  75% {
+    backdrop-filter: blur(0px) brightness(80%);
+    min-height: 100vh;
   }
   100% {
     backdrop-filter: blur(0px) brightness(0%);

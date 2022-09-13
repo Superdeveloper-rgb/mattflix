@@ -1,16 +1,16 @@
 import banners from '../styles/banners.module.css'
 import rows from '../styles/rows.module.css'
 import Head from 'next/head'
-import Info from '../components/Info'
-import FeatureRow from '../components/FeatureRow'
-import ContentCard, { Placeholder } from '../components/ContentCard'
-import prisma from '../lib/prisma';
-import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
 import Link from 'next/link'
+import Info from '../components/Info'
+import Errorbox from '../components/Errorbox'
+import ContentCard from '../components/ContentCard'
+import prisma from '../lib/prisma';
 import { useEffect, useState } from 'react'
-import supabase from '../lib/supabaseClient'
+import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
 
 export default function Home(props) {
+  if (!props.titles || props.error) return <Errorbox title={"Error 500"} message={JSON.stringify(props.error) || "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
   useEffect(()=>setRowLimit(Math.floor(width/150)))
@@ -25,6 +25,7 @@ export default function Home(props) {
       </Head>
 
       <header className={banners.header} style={{ backgroundImage: `url(${featuredTitle.banner_url})` }}>
+        <div className={banners.vignette}/>
         <Info title={featuredTitle.title} description={featureDesc} cid={featuredTitle.slug} links />
       </header>
 

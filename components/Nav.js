@@ -11,7 +11,7 @@ export default function Nav() {
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
-        return ()=>{window.removeEventListener("scroll", handleScroll)}
+        return () => { window.removeEventListener("scroll", handleScroll) }
     });
     function handleScroll() {
         setScroll(window.scrollY);
@@ -27,8 +27,8 @@ export default function Nav() {
             <ol className={styles.linkContainer}>
                 <Navlink href="/" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New</Navlink>
-                {!user && <li><Link href={"/login"}><a className={styles.login}>Login</a></Link></li>}
-                {user && <Navlink href="/profile" nextLink>Profile</Navlink>}
+                {user ? (<Navlink href="/profile" nextLink>Profile</Navlink>)
+                : (<li><Link href={"/login"}><a className={styles.login}>Login</a></Link></li>)}
             </ol>
         </nav>
     )

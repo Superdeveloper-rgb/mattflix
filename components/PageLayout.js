@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 
 export default function PageLayout({ children }) {
     const router = useRouter();
-    const padding = ['/', '/[slug]/watch', '/[slug]'].includes(router.pathname) ? undefined : '80px'
+    const paddingTop = router.pathname === "/new" ? '80px' : undefined;
     const noNavRoutes = ['/[slug]/watch'];
     return (
         <>
             {noNavRoutes.includes(router.pathname)  ? <></> : <Nav />}
-            <main style={{paddingTop: padding}}>{children}</main>
+            <main style={{paddingTop}}>{children}</main>
         </>
     )
 }

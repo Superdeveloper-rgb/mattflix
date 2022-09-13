@@ -1,5 +1,4 @@
 import styles from "../styles/rows.module.css"
-import Info from "./Info";
 
 export default function ContentCard(props) {
   return (
