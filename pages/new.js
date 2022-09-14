@@ -1,12 +1,20 @@
-import rows from '../styles/rows.module.css'
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Info from '../components/Info';
 import FeatureRow from '../components/FeatureRow';
+import ClickableCard from '../components/ClickableCard';
 import ContentCard, { Placeholder } from '../components/ContentCard';
 import prisma from '../lib/prisma';
+import { useScreenSize } from '../lib/utils';
 import { makeSerializable } from '../lib/utils';
+import rows from '../styles/rows.module.css'
 
 export default function newPage(props) {
+  let [rowLimit, setRowLimit] = useState(10);
+  let [width] = useScreenSize();
+  useEffect(()=>setRowLimit(Math.floor(width/150)))
+  console.log(props.titles);
+
   return (<>
     <Head>
       <title>New stuff - Mattflix</title>
@@ -15,19 +23,15 @@ export default function newPage(props) {
       <ContentCard src={props.titles[0].banner_url} />
       <Info title={props.titles[0].title} description={props.titles[0].summary} cid={props.titles[0].slug} links />
     </section>
-    <section className={rows.thumbnailSlider}>
-      <ContentCard default />
-      <ContentCard default />
-      <ContentCard default />
+    <section className={rows.shelf}>
+      {props.titles.slice(0, rowLimit).map(title=>{
+        return <ClickableCard slug={title.slug} poster={title.poster_url} key={title.id}/>
+      })}
     </section>
     <section className={rows.shelf}>
-      <ContentCard default />
-      <ContentCard default />
-      <ContentCard default />
-      <ContentCard default />
-      <ContentCard default />
-      <ContentCard default />
-      <ContentCard default />
+      {props.titles.slice(rowLimit, rowLimit*2).map(title=>{
+        return <ClickableCard slug={title.slug} poster={title.poster_url} key={title.id}/>
+      })}
     </section>
     <FeatureRow title="Gummy bear" description="Cloudy with a chance of meatballs" />
     <Placeholder />

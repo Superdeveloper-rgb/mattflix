@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
-import styles from "../styles/login.module.css"
+import styles from "../styles/auth.module.css"
 
 export default function login() {
   const [email, setEmail] = useState("");
@@ -17,15 +17,16 @@ export default function login() {
     if (!/[a-z0-9_\.]+@[a-z]+\.[a-z]{2,5}/.test(email)) return setError("Are you sure that's your email? It seems off...")
     loginbtn.current.disabled = true;
     loginbtn.current.children[0].className = "fas fa-circle-notch";
-    const { error, data } = await supabase.auth.signIn({email}, {redirectTo: "/profile"})
-    if(error) {
-       loginbtn.current.disabled = false;
+    const { error, data } = await supabase.auth.signIn({ email }, { redirectTo: "/profile" })
+    if (error) {
+      loginbtn.current.disabled = false;
+      loginbtn.current.children[0].className = "fas fa-arrow-right";
     } else {
       submit(true);
     }
   }
 
-  return !submitted ?  (
+  return !submitted ? (
     <section className={styles.container}>
       <div className={styles.textwrapper}>
         <h1>Sign in to Mattflix</h1>
@@ -52,11 +53,11 @@ export default function login() {
       </div>
     </section>
   ) : (
-  <section className={styles.container}>
-    <div className={styles.textwrapper}>
+    <section className={styles.container}>
+      <div className={styles.textwrapper}>
         <h1>Almost there!</h1>
         <p>A magic link has been sent to you, check your email to sign in</p>
       </div>
-  </section>
+    </section>
   )
 }

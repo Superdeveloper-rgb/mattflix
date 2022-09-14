@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
-import styles from "../styles/login.module.css"
+import styles from "../styles/auth.module.css"
 
 export default function ProfilePage() {
     const router = useRouter();
@@ -11,10 +11,12 @@ export default function ProfilePage() {
     useEffect(fetchProfile, []);
 
     function fetchProfile() {
+        setState({waiting: true})
         const profileData = supabase.auth.user();
         if (profileData) {
             setProfile(profileData);
-            setName(profileData.user_metadata.name)
+            setName(profileData.user_metadata.name);
+            setState({waiting: false});
         } else {
             router.push("/login")
         }
@@ -34,28 +36,29 @@ export default function ProfilePage() {
         }
     }
     async function logout() {
-        setState({ waiting: true })
+        setState({ waiting: true });
         await supabase.auth.signOut();
-        router.push("/login")
+        router.push("/login");
     }
 
     if (!profile) return <p>You're not signed in. <a href="/login">login -&gt;</a></p>
     return (
         <section className={styles.container}>
             <div className={styles.textwrapper}>
-                <img src={`https://avatars.dicebear.com/api/adventurer/${profile.user_metadata.name || "me"}.svg?r=50&scale=50`} width="100px" height="100px"/>
+                <img src={`https://avatars.dicebear.com/api/adventurer/${profile.user_metadata.name || "me"}.svg?r=50&scale=50`} className={styles.avatar} alt={name} title="auto generated based on your name"/>
                 <h2>Welcome, {profile.user_metadata.name || profile.email}!</h2>
-                <label>Name:
+                <label>Name: 
                     <input
                         type="text"
-                        placeholder="name"
                         onChange={e => { setName(e.target.value) }}
                         className={styles.name}
-                        value={name} />
+                        value={name || ""} />
                 </label>
-                <p style={{ color: "white" }}>Email: {profile.email}</p>
-                {name !== profile.user_metadata.name && <button onClick={updateProfile}>update name</button>}
-                <button onClick={logout}>Sign Out</button>
+                <label>Email: <input value={profile.email} type="text" disabled/></label>
+                <br/>
+                <br/>
+                {name !== profile.user_metadata.name && <button onClick={updateProfile} className={styles.actionbtn} disabled={state.waiting}>{state.waiting ? <i className="fas fa-circle-notch"/> : "update name"}</button>}
+                <button onClick={logout} className={[styles.primarybtn, styles.actionbtn].join(' ')} disabled={state.waiting}>Sign Out</button>
             </div>
         </section>
     )

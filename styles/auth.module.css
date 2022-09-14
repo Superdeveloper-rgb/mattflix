@@ -7,13 +7,19 @@
     font-family: "MattflixSans", Arial, Helvetica, sans-serif;
 }
 .textwrapper {
+    position: relative;
     display: flex;
     flex-flow: column;
     text-align: center;
+    max-width: 500px;
+    padding: 20px;
 }
 .textwrapper > p {color: gray;}
-.textwrapper > span {display: inline-block;}
-.emailInput, .loginbtn {
+.textwrapper > span {
+    display: inline-flex;
+    flex-flow: row nowrap; 
+}
+.container input, .container button {
     display: inline-block;
     border: none;
     padding: 10px;
@@ -30,6 +36,7 @@
     cursor: pointer;
     margin-left: 0;
     border-radius: 0 10px 10px 0;
+    min-width: 50px;
     background-color: var(--mattflix-red);
 }
 .shake{
@@ -40,20 +47,39 @@
     color: var(--light-gray);
     /* background-color: rgb(36, 36, 36); */
 }
-.loginbtn:disabled > i::before {
+.textwrapper button:disabled > i::before {
     display: inline-block;
     animation-name: rotate;
     animation-duration: 1s;
     animation-iteration-count: infinite;
 }
-.name {
-    border-radius: 10px;
+
+/* profile page */
+.avatar {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+.textwrapper label > input {
     padding: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
     font-size: 1em;
     color: white;
     border: none;
     background-color: var(--light-gray);
 }
+.actionbtn {
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--light-gray);
+}
+.primarybtn{background-color: var(--mattflix-red);}
+@media screen and (max-width: 400px) {
+    .textwrapper {font-size: 0.75em;}
+    .emailInput {min-width: 70vw;}
+}
+
 @keyframes rotate {
     from {
         transform: rotate(0deg);

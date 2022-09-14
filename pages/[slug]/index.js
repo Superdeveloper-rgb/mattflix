@@ -5,25 +5,27 @@ import rows from '../../styles/rows.module.css'
 import { makeSerializable } from "../../lib/utils";
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function detailsPage(props) {
+export default function detailsPage({ title, related }) {
     const [animated, animate] = useState(false);
     const router = useRouter();
     let player = useRef(null);
     function playVid() {
         player.current.play()
         animate(true);
+        window.scrollTo({ top: 0, behavior: "smooth" })
         setTimeout(() => {
             router.push(`${router.asPath}/watch`)
         }, 1500);
     }
     return (<>
-        <section style={{backgroundImage: `url(${props.banner_url})`, backgroundSize: "cover", backgroundPosition: "center", }} >
+        <section style={{ backgroundImage: `url(${title.banner_url})`, backgroundSize: "cover", backgroundPosition: "center", }} >
             <div className={animated ? [rows.infoBanner, rows.zoom].join(' ') : rows.infoBanner}>
-                <ContentCard src={props.poster_url} />
+                <ContentCard src={title.poster_url} />
                 <div className={infoStyles.textWrapper}>
-                    <h1 className={infoStyles.title}>{props.title}</h1>
-                    <p className={infoStyles.description}>{props.summary}</p>
+                    <h1 className={infoStyles.title}>{title.title}</h1>
+                    <p className={infoStyles.description}>{title.summary}</p>
                     <button onClick={playVid} className={infoStyles.watchLink}></button>
                 </div>
                 <video style={{ display: "none" }} ref={player} />
@@ -31,11 +33,13 @@ export default function detailsPage(props) {
         </section>
 
         <h1 className={rows.rowTitle}>Related</h1>
-        <section className={rows.shelf}>
-            <ContentCard default />
-            <ContentCard default />
-            <ContentCard default />
-        </section>
+        {!!related.length ? <>
+            <section className={rows.shelf}>
+                {related.map((item) => {
+                    return <Link href={item.slug}><a><ContentCard src={item.poster_url} /></a></Link>
+                })}
+            </section>
+        </> : <p className={rows.rowTitle}>No other content like this, you found a unique gem!</p>}
     </>)
 }
 
@@ -51,10 +55,20 @@ export async function getServerSideProps(context) {
             summary: true,
             created_at: true,
             banner_url: true,
-            poster_url: true
+            poster_url: true,
+            tags: true
         }
     })
+    const related = await prisma.content.findMany({
+        where: {
+            tags: {
+                hasSome: titleInfo.tags,
+            },
+            id: { not: titleInfo.id },
+            public: true
+        },
+    })
     return ({
-        props: makeSerializable(titleInfo)
+        props: { title: makeSerializable(titleInfo), related: makeSerializable(related) }
     })
 }
