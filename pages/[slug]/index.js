@@ -1,5 +1,6 @@
 import prisma from "../../lib/prisma";
 import ContentCard from "../../components/ContentCard";
+import Errorbox from "../../components/Errorbox"
 import infoStyles from "../../styles/info.module.css";
 import rows from '../../styles/rows.module.css'
 import { makeSerializable } from "../../lib/utils";
@@ -7,7 +8,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function detailsPage({ title, related }) {
+export default function detailsPage({ title, related, error }) {
     const [animated, animate] = useState(false);
     const router = useRouter();
     let player = useRef(null);
@@ -19,6 +20,7 @@ export default function detailsPage({ title, related }) {
             router.push(`${router.asPath}/watch`)
         }, 1500);
     }
+    if(error) return (<Errorbox title={"content not found"} message={error} code={404}/>)
     return (<>
         <section style={{ backgroundImage: `url(${title.banner_url})`, backgroundSize: "cover", backgroundPosition: "center", }} >
             <div className={animated ? [rows.infoBanner, rows.zoom].join(' ') : rows.infoBanner}>
@@ -59,6 +61,7 @@ export async function getServerSideProps(context) {
             tags: true
         }
     })
+    if(!titleInfo) return {props: {error: "Couldn't find this content :("}}
     const related = await prisma.content.findMany({
         where: {
             tags: {

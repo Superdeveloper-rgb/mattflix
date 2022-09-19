@@ -38,7 +38,7 @@ export default function ProfilePage() {
     async function logout() {
         setState({ waiting: true });
         await supabase.auth.signOut();
-        router.push("/login");
+        // router.push("/login");
     }
 
     if (!profile) return <p>You're not signed in. <a href="/login">login -&gt;</a></p>

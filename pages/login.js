@@ -30,12 +30,13 @@ export default function login() {
     <section className={styles.container}>
       <div className={styles.textwrapper}>
         <h1>Sign in to Mattflix</h1>
-        <p>Enter your email to get started with passwordless login!</p>
+        <p>Enter your email and we'll send you a one-time link to login or signup, no password needed!</p>
         <br />
         <br />
-        <span className={error && styles.shake}>
+        <span className={error ? styles.shake : undefined}>
           <input
             onChange={e => setEmail(e.target.value)}
+            onKeyDown={(e)=>{if (e.key === "Enter")login()}}
             type="email"
             placeholder="email"
             className={styles.emailInput}

@@ -18,6 +18,7 @@
 .textwrapper > span {
     display: inline-flex;
     flex-flow: row nowrap; 
+    justify-content: center;
 }
 .container input, .container button {
     display: inline-block;

@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
 
 export default function Home(props) {
-  if (!props.titles || props.error) return <Errorbox title={"Error 500"} message={JSON.stringify(props.error) || "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
+  if (!props.titles || props.error) return <Errorbox  title={"Servor error"} message={JSON.stringify(props.error) || "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
   useEffect(()=>setRowLimit(Math.floor(width/150)))

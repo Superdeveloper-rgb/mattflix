@@ -13,7 +13,6 @@ export default function newPage(props) {
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
   useEffect(()=>setRowLimit(Math.floor(width/150)))
-  console.log(props.titles);
 
   return (<>
     <Head>

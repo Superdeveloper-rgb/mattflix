@@ -27,8 +27,8 @@ export default function Nav() {
             <ol className={styles.linkContainer}>
                 <Navlink href="/" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New</Navlink>
-                {user ? (<Navlink href="/profile" nextLink>Profile</Navlink>)
-                : (<li><Link href={"/login"}><a className={styles.login}>Login</a></Link></li>)}
+                {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "me"}.svg?r=50&translateY=7`}/></a></Link></li>)
+                : (<li><Link href="/login"><a className={styles.login}>Login</a></Link></li>)}
             </ol>
         </nav>
     )
