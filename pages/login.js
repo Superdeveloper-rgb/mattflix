@@ -35,7 +35,7 @@ export default function login() {
         <br />
         <span className={error ? styles.shake : undefined}>
           <input
-            onChange={e => setEmail(e.target.value)}
+            onChange={e =>{setEmail(e.target.value); (error && setError(false))}}
             onKeyDown={(e)=>{if (e.key === "Enter")login()}}
             type="email"
             placeholder="email"
