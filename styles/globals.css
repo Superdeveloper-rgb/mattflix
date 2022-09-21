@@ -31,10 +31,24 @@ a {
 :root {
   --gray: rgb(22, 22, 22);
   --light-gray: rgb(50, 50, 50);
-  --theme-color: rgb(147, 42, 179);
+  --theme-color: var(--mattflix-red);
   --mattflix-red: rgb(202, 53, 52);
   --text: rgb(210, 210, 210);
   --card-width: 150px;
   --card-height: 266.67px;
   --card-aspect-ratio: 9 / 16;
+}
+
+/* Scrollbar styles */
+* ::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+* ::-webkit-scrollbar-track {
+  background-color: var(--gray);
+}
+* ::-webkit-scrollbar-thumb {
+  background: var(--light-gray); 
+  border-radius: 10px;
+  width: 5px;
 }

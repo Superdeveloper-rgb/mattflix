@@ -1,6 +1,6 @@
 /* Regular Shelves */
 .shelf {
-  width: 100vw;
+  width: 100%;
   display: grid;
   color: var(--text);
   grid-auto-columns: var(--card-width);
@@ -144,6 +144,19 @@
 .infoBanner .contentCard img {
   width: 100%;
   height: 100%;
+}
+.infoBanner .contentCard:hover{position: relative;}
+.infoBanner label .contentCard:hover::before {
+  content: '\f382';
+  color: var(--text);
+  font-weight: 900;
+  font-family: "Font Awesome 5 Pro";
+  inset: 0;
+  position: absolute;
+  border-radius: 10px;
+  background-color: rgba(22, 22, 22, 0.5);
+  display: grid;
+  place-items: center;
 }
 .zoom .contentCard {
   transform: scale(0.8);
