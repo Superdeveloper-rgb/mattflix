@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Info from '../components/Info';
 import FeatureRow from '../components/FeatureRow';
 import ClickableCard from '../components/ClickableCard';
-import ContentCard, { Placeholder } from '../components/ContentCard';
+import ContentCard from '../components/ContentCard';
 import prisma from '../lib/prisma';
 import { useScreenSize } from '../lib/utils';
 import { makeSerializable } from '../lib/utils';
@@ -13,6 +13,7 @@ export default function newPage(props) {
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
   useEffect(()=>setRowLimit(Math.floor(width/150)))
+  let featureRow = props.titles[(rowLimit*2)+1]
 
   return (<>
     <Head>
@@ -32,8 +33,7 @@ export default function newPage(props) {
         return <ClickableCard slug={title.slug} poster={title.poster_url} key={title.id}/>
       })}
     </section>
-    <FeatureRow title="Gummy bear" description="Cloudy with a chance of meatballs" />
-    <Placeholder />
+    {featureRow && <FeatureRow title={featureRow.title} description={featureRow.summary} cid={featureRow.slug} poster={featureRow.poster_url}/>}
 
   </>)
 }

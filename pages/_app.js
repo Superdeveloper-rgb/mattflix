@@ -6,27 +6,6 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      handleAuthChange(event, session)
-      if (event === 'SIGNED_OUT') {
-        router.push("/login")
-      }
-    })
-    return () => {
-      authListener.unsubscribe()
-    }
-  }, [])
-  async function handleAuthChange(event, session) {
-    await fetch('/api/auth', {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      credentials: 'same-origin',
-      body: JSON.stringify({ event, session }),
-    })
-  }
-  
   return (<>
     <Head>
       <meta name="description" content="Matt's personal streaming platform for all his incredible content." />

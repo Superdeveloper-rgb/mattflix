@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
 
 export default function Home(props) {
-  if (!props.titles || props.error) return <Errorbox  title={"Servor error"} message={JSON.stringify(props.error) || "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
+  if (!props.titles || props.error) return <Errorbox options={["reload"]} title={"Servor error"} message={JSON.stringify(props.error) || "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
   useEffect(()=>setRowLimit(Math.floor(width/150)))
@@ -25,7 +25,7 @@ export default function Home(props) {
       </Head>
 
       <header className={banners.header} style={{ backgroundImage: `url(${featuredTitle.banner_url})` }}>
-        <div className={banners.vignette}/>
+        <div className={banners.vignette} style={{backgroundImage: `url(https://${process.env.bunny_pull_zone}.b-cdn.net/${featuredTitle.bunny_id}/preview.webp)`}} />
         <Info title={featuredTitle.title} description={featureDesc} cid={featuredTitle.slug} links />
       </header>
 
