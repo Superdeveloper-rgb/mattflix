@@ -31,6 +31,31 @@
   z-index: 0;
   background: rgb(22,22,22);
   background: linear-gradient(30deg, rgba(22,22,22,1) 0%, rgba(0,0,0,0) 80%);
+  background-size: cover;
+  background-position: center;
+  animation-name: fadeThrough;
+  animation-delay: 2s;
+  animation-duration: 10s;
+  animation-fill-mode: both;
+}
+.header div:not(.vignette) {
+  animation-name: inverseFadeThrough;
+  animation-delay: 2s;
+  animation-duration: 10s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeThrough {
+  0% {opacity: 0;}
+  25% {opacity: 1;}
+  75% {opacity: 1;}
+  100% {opacity: 0;}
+}
+@keyframes inverseFadeThrough {
+  0% {opacity: 1;}
+  25% {opacity: 0.5;}
+  75% {opacity: 0.5;}
+  100% {opacity: 1;}
 }
 
 /* Latge screens */
