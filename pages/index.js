@@ -25,7 +25,7 @@ export default function Home(props) {
       </Head>
 
       <header className={banners.header} style={{ backgroundImage: `url(${featuredTitle.banner_url})` }}>
-        <div className={banners.vignette} style={{backgroundImage: `url(https://${process.env.bunny_pull_zone}.b-cdn.net/${featuredTitle.bunny_id}/preview.webp)`}} />
+        <div className={banners.vignette} style={{backgroundImage: `url(https://${process.env.NEXT_PUBLIC_bunny_pull_zone}.b-cdn.net/${featuredTitle.bunny_id}/preview.webp)`}} />
         <Info title={featuredTitle.title} description={featureDesc} cid={featuredTitle.slug} links />
       </header>
 
@@ -37,7 +37,7 @@ export default function Home(props) {
 
       <section className={rows.shelf}>
         {props.titles.slice((rowLimit), (rowLimit * 2)).map((title) => {
-          return <Link href={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
+          return <Link href={title.slug} key={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
         })}
       </section>
 
@@ -50,7 +50,7 @@ export default function Home(props) {
 
       <section className={rows.shelf}>
         {props.titles.slice((rowLimit * 3), (rowLimit * 4)).map((title) => {
-          return <Link href={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
+          return <Link href={title.slug} key={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
         })}
       </section>
     </>
