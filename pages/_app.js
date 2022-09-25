@@ -1,9 +1,6 @@
 import '../styles/globals.css'
 import Head from 'next/head'
 import PageLayout from '../components/PageLayout'
-import supabase from '../lib/supabaseClient'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }) {
   return (<>

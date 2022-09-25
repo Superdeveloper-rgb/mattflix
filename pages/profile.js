@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
 
@@ -59,10 +60,10 @@ export default function ProfilePage() {
                 <br />
                 <span>
                     {name !== profile.user_metadata.name && <button onClick={updateProfile} className={styles.actionbtn} disabled={state.waiting}>{state.waiting ? <i className="fas fa-circle-notch" /> : "update name"}</button>}
-                    {profile.user_metadata.role === "admin" && <a href="/upload" className={styles.actionbtn}>Upload <i className="fas fa-cloud-upload-alt" /></a>}
                 </span>
                 <button onClick={logout} className={[styles.primarybtn, styles.actionbtn].join(' ')} disabled={state.waiting}>Sign Out</button>
             </div>
+                {profile.user_metadata.role === "admin" && <Link href="/upload"><a>Upload <i className="fas fa-cloud-upload-alt" /></a></Link>}
         </section>
     )
 }

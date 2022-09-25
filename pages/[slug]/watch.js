@@ -29,7 +29,7 @@ export default function watch(props) {
     return (<>
         <span className={styles.backArrow} onClick={()=>router.back()}><i className="fas fa-arrow-left"/>&nbsp;Back</span>
         <div className={styles.loader}></div>
-        <div className={classes}><iframe src={`https://iframe.mediadelivery.net/embed/${process.env.bunny_library_id}/${props.bunny_id}?autoplay=true`} loading="lazy" style={{border: "none", position: "absolute", top: 0, height: "100%", width: "100%"}} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowFullScreen={true}></iframe></div>
+        <div className={classes}><iframe src={`https://iframe.mediadelivery.net/embed/${process.env.NEXT_PUBLIC_bunny_library_id}/${props.bunny_id}?autoplay=true`} loading="lazy" style={{border: "none", position: "absolute", top: 0, height: "100%", width: "100%"}} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowFullScreen={true}></iframe></div>
     </>)
 }
 

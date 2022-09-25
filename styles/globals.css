@@ -33,6 +33,7 @@ a {
   --light-gray: rgb(50, 50, 50);
   --theme-color: var(--mattflix-red);
   --mattflix-red: rgb(202, 53, 52);
+  --link: rgb(43, 139, 208);
   --text: rgb(210, 210, 210);
   --card-width: 150px;
   --card-height: 266.67px;

@@ -39,7 +39,7 @@
   animation-fill-mode: both;
 }
 .header div:not(.vignette) {
-  animation-name: inverseFadeThrough;
+  /* animation-name: inverseFadeThrough; */
   animation-delay: 2s;
   animation-duration: 10s;
   animation-fill-mode: both;
