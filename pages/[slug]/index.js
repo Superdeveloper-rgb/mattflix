@@ -20,7 +20,7 @@ export default function detailsPage({ title, related, error }) {
             router.push(`${router.asPath}/watch`)
         }, 1500);
     }
-    if(error) return (<Errorbox title={"content not found"} message={error} code={404}/>)
+    if(error) return (<Errorbox title={"content not found"} message={error} code={404} options={["reload"]}/>)
     return (<>
         <section style={{ backgroundImage: `url(${title.banner_url})`, backgroundSize: "cover", backgroundPosition: "center", }} >
             <div className={animated ? [rows.infoBanner, rows.zoom].join(' ') : rows.infoBanner}>

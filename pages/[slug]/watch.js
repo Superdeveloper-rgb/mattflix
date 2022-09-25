@@ -7,8 +7,8 @@ import styles from "../../styles/videoPlayer.module.css";
 export default function watch(props) {
     const router = useRouter()
     let [classes, setClasses] = useState(styles.video);
-    let [backBtnClass, setBackBtnClass] = useState(["fas fa-arrow-left", styles.backArrow].join(' '));
     useEffect(()=>setClasses([styles.video, styles.in].join(' ')), []) // add "in" class on page load
+    // let [backBtnClass, setBackBtnClass] = useState(["fas fa-arrow-left", styles.backArrow].join(' '));
     // useEffect(() => {
     //     let hideTimeout;
     //     function showBackBtn(){
