@@ -39,7 +39,6 @@ export default function ProfilePage() {
     async function logout() {
         setState({ waiting: true });
         await supabase.auth.signOut();
-        router.push("/login");
     }
 
     if (!profile) return <p>Loading...</p>

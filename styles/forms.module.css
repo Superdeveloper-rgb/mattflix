@@ -21,6 +21,7 @@
 }
 .form input,
 .form textarea {
+  width: 100%;
   background-color: var(--light-gray);
   border: none;
   border-radius: 10px;
@@ -31,7 +32,8 @@
 }
 .form textarea {
   resize: vertical;
-  max-height: 150px;
+  min-height: 100px;
+  max-height: 200px;
 }
 .form.leftPanel, .form.rightPanel {
   width: 30%;
@@ -88,6 +90,7 @@
 
 .fileSelector {
   width: 100%;
+  position: relative;
   aspect-ratio: 16 / 9;
   background-color: var(--light-gray);
   display: grid;
@@ -97,7 +100,8 @@
   transition: background-color 500ms;
   font-size: 20px;
 }
-.fileSelector:hover{background-color: rgb(70, 70, 70);}
+.fileSelector i{transition: transform 500ms;}
+.fileSelector:hover i{transform: translateY(-5px) scale(1.1);}
 .bannerInput {
   display: block;
   background-color: var(--light-gray);
@@ -108,6 +112,10 @@
   border-bottom-left-radius: 10px;
   cursor: pointer;
   z-index: 1;
+}
+.previewfile {
+  height: 100%;
+  position: absolute;
 }
 /* tags */
 .tagsList {

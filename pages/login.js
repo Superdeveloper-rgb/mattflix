@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
@@ -11,25 +11,6 @@ export default function loginPage() {
   const loginbtn = useRef(null);
   if (supabase.auth.user()) router.push("/profile");
 
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      handleAuthChange(event, session)
-      if (event === 'SIGNED_OUT') {
-        router.push("/login")
-      }
-    })
-    return () => {
-      authListener.unsubscribe()
-    }
-  }, [])
-  async function handleAuthChange(event, session) {
-    await fetch('/api/auth', {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      credentials: 'same-origin',
-      body: JSON.stringify({ event, session }),
-    })
-  }
   async function login() {
     setError(false);
     if (!email) return setError("Please enter your email adress")
