@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function PageLayout({ children }) {
+    const router = useRouter();    
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
             handleAuthChange(event, session)
@@ -11,9 +12,8 @@ export default function PageLayout({ children }) {
                 router.push("/login")
             }
             if (event === 'SIGNED_IN') {
-                router.push('/profile')
+                if(window.location.pathname === "/login") router.push('/profile');
             }
-            console.log(event);
         })
         return () => {
             authListener.unsubscribe()
@@ -28,7 +28,6 @@ export default function PageLayout({ children }) {
         })
     }
 
-    const router = useRouter();
     const paddingTop = ["/new", "/upload"].includes(router.pathname) ? '80px' : undefined;
     const noNavRoutes = ['/[slug]/watch'];
     return (

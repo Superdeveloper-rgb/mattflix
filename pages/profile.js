@@ -4,7 +4,7 @@ import Link from "next/link";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
 
-export default function ProfilePage() {
+export default function ProfilePage({user}) {
     const router = useRouter();
     const [profile, setProfile] = useState(null);
     const [name, setName] = useState("");
@@ -13,7 +13,7 @@ export default function ProfilePage() {
 
     function fetchProfile() {
         setState({ waiting: true })
-        const profileData = supabase.auth.user();
+        const profileData = user;
         if (profileData) {
             setProfile(profileData);
             setName(profileData.user_metadata.name);
@@ -65,4 +65,9 @@ export default function ProfilePage() {
                 {profile.user_metadata.role === "admin" && <Link href="/upload"><a>Upload <i className="fas fa-cloud-upload-alt" /></a></Link>}
         </section>
     )
+}
+
+export async function getServerSideProps({req}) {
+    const {user} = await supabase.auth.api.getUserByCookie(req)
+    return {props: {user}}
 }
