@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
@@ -9,7 +9,26 @@ export default function loginPage() {
   const [error, setError] = useState(false)
   const router = useRouter();
   const loginbtn = useRef(null);
-  if (supabase.auth.user()) router.push("/profile");
+  if (supabase.auth.session()) router.push("/profile");
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      handleAuthChange(event, session)
+      if (event === 'SIGNED_IN') {
+        if (window.location.pathname === "/login" && supabase.auth.user()) router.push('/profile');
+      }
+    })
+    return () => {
+      authListener.unsubscribe()
+    }
+  }, [])
+  async function handleAuthChange(event, session) {
+    await fetch('/api/auth', {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      credentials: 'same-origin',
+      body: JSON.stringify({ event, session }),
+    })
+  }
 
   async function login() {
     setError(false);
@@ -35,8 +54,8 @@ export default function loginPage() {
         <br />
         <span className={error ? styles.shake : undefined}>
           <input
-            onChange={e =>{setEmail(e.target.value); (error && setError(false))}}
-            onKeyDown={(e)=>{if (e.key === "Enter")login()}}
+            onChange={e => { setEmail(e.target.value); (error && setError(false)) }}
+            onKeyDown={(e) => { if (e.key === "Enter") login() }}
             type="email"
             placeholder="email"
             className={styles.emailInput}
@@ -58,7 +77,7 @@ export default function loginPage() {
       <div className={styles.textwrapper}>
         <h1>Almost there!</h1>
         <p>A magic link has been sent to {email}, check your inbox to sign in</p>
-        <a href="/login" style={{textDecoration: "underline"}}>I didn't receive a link</a>
+        <a href="/login" style={{ textDecoration: "underline" }}>I didn't receive a link</a>
       </div>
     </section>
   )
