@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
+import Errorbox from "../components/Errorbox";
 
 export default function loginPage() {
   const [email, setEmail] = useState("");
