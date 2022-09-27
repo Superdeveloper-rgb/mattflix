@@ -5,6 +5,7 @@ import infoStyles from "../styles/info.module.css"
 import formStyles from "../styles/forms.module.css"
 import ContentCard from "../components/ContentCard"
 import Errorbox from "../components/Errorbox"
+import Popup from "../components/popup";
 import { useState, useRef, useReducer, useEffect } from "react";
 import { useScreenSize, joinClasses } from "../lib/utils";
 
@@ -156,7 +157,18 @@ export default function uploadPage({ user, authError }) {
                 <label>Poster Image: <input type="file" id="posterimgInput" onChange={previewFile} accept=".png, .jpg, .jpeg, .webp, .gif" ref={posterInput} /></label>
             </form>
             <button className={formStyles.uploadbtn} onClick={submit} ref={uploadButton}>Upload!</button>
-            {progress.status !== "not_started" && <p>Status: {progress.status}<progress/></p>}
+            {!["not_started", "success", "done"].includes(progress.status) &&
+                <Popup
+                    title={"Launching... 🚀"}
+                    body={`Current status: ${progress.status}`}
+                    open={true}>
+                    <progress style={{ width: "100%" }} />
+                </Popup>}
+            {progress.status === "success" &&
+                <Popup
+                    title={"Upload successful! 🎉"}
+                    open={progress.status !== "done"}
+                    actions={{ Done: () => updateprogress({ status: "done" }) }} />}
         </section>
 
         <pre style={{ width: "90%", overflow: "scroll", margin: "auto" }}>
