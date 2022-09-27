@@ -9,6 +9,7 @@ import { useState, useRef, useReducer, useEffect } from "react";
 import { useScreenSize, joinClasses } from "../lib/utils";
 
 export default function uploadPage({ user, authError }) {
+    if (authError) return <Errorbox title="Unauthorized" message="You're not authorized to access this page :/" code={401} />
     const [error, setError] = useState("")
     const [width] = useScreenSize();
     const videoInput = useRef();
@@ -108,7 +109,6 @@ export default function uploadPage({ user, authError }) {
             setError({title: String(error.title || ""), msg: String(error.msg || error)})
         }
     }
-    if (authError) return <Errorbox title="Unauthorized" message="You're not authorized to access this page :/" code={401} />
     return (<>
         {error && <Errorbox title={error.title || "500 - Something went wrong on our end."} message={error.msg} options={["close"]} action={() => setError(false)} />}
 
