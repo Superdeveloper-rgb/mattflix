@@ -23,11 +23,11 @@ export default function Nav() {
 
     return (
         <nav className={transparency ? styles.mainNav : [styles.mainNav, styles.scrolled].join(" ")}>
-            <a href="/"><img src="/mattflix.png" className={styles.logo} /></a>
+            <Link href="/"><a><img src="/mattflix.png" className={styles.logo} /></a></Link>
             <ol className={styles.linkContainer}>
                 <Navlink href="/" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New</Navlink>
-                {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "me"}.svg?r=50&translateY=7`}/></a></Link></li>)
+                {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`}/></a></Link></li>)
                 : (<li><Link href="/login"><a className={styles.login}>Login</a></Link></li>)}
             </ol>
         </nav>

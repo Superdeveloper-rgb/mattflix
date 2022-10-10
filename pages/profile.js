@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
+import Head from "next/head";
 
 export default function ProfilePage() {
     const router = useRouter();
@@ -45,8 +46,11 @@ export default function ProfilePage() {
     if (!profile) return <p>Loading...</p>
     return (
         <section className={styles.container}>
+            <Head>
+                <title>{(profile.user_metadata.name && `${profile.user_metadata.name}'s`) || "My"} profile on Mattflix</title>
+            </Head>
             <div className={styles.textwrapper}>
-                <img src={`https://avatars.dicebear.com/api/adventurer/${profile.user_metadata.name || "me"}.svg?r=50&scale=50`} className={styles.avatar} alt={name} title="auto generated based on your name" />
+                <img src={`https://avatars.dicebear.com/api/adventurer/${profile.user_metadata.name || "luna"}.svg?r=50&scale=50`} className={styles.avatar} alt={name} title="auto generated based on your name" />
                 <h2>Welcome, {profile.user_metadata.name || profile.email}!</h2>
                 <label>Name:
                     <input
@@ -63,7 +67,7 @@ export default function ProfilePage() {
                 </span>
                 <button onClick={logout} className={[styles.primarybtn, styles.actionbtn].join(' ')} disabled={state.waiting}>Sign Out</button>
             </div>
-                {profile.user_metadata.role === "admin" && <Link href="/upload"><a>Upload <i className="fas fa-cloud-upload-alt" /></a></Link>}
+            {profile.user_metadata.role === "admin" && <Link href="/upload"><a>Upload <i className="fas fa-cloud-upload-alt" /></a></Link>}
         </section>
     )
 }

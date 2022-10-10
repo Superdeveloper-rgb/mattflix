@@ -38,7 +38,7 @@
     margin-left: 0;
     border-radius: 0 10px 10px 0;
     min-width: 50px;
-    background-color: var(--mattflix-red);
+    background-color: var(--theme-color);
 }
 .shake{
     animation-name: shake;
@@ -78,7 +78,7 @@
 .textwrapper > span .actionbtn {
     flex-grow: 1;
 }
-.primarybtn{background-color: var(--mattflix-red);}
+.primarybtn{background-color: var(--theme-color);}
 @media screen and (max-width: 400px) {
     .textwrapper {font-size: 0.75em;}
     .emailInput {min-width: 70vw;}

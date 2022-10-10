@@ -17,7 +17,7 @@
     display: inline-block;
     padding: 10px 20px;
     border-radius: 50px;
-    background-color: var(--mattflix-red);
+    background-color: var(--theme-color);
 }
 .logo{
     height: 40px;
@@ -39,12 +39,12 @@
 }
 
 .linkContainer a.active {
-    border-bottom: 3px solid var(--mattflix-red);
+    border-bottom: 3px solid var(--theme-color);
 }
 .userIcon {
     display: inline-block;
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    background-color: var(--mattflix-red);
+    background-color: var(--theme-color);
 }

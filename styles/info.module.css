@@ -28,7 +28,7 @@
   transition: opacity 1s;
 }
 .watchLink {
-  background-color: var(--mattflix-red);
+  background-color: var(--theme-color);
   background-image: url("/icons/play-white.svg");
   margin-right: 10px;
 }

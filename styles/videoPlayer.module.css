@@ -24,7 +24,7 @@
   height: 50px;
   border-radius: 100%;
   transform: translate(-50%, -50%);
-  border-top: 3px solid var(--mattflix-red);
+  border-top: 3px solid var(--theme-color);
   animation-name: spin;
   animation-duration: 600ms;
   animation-timing-function: cubic-bezier(0.28, 0.01, 0.71, 0.97);
