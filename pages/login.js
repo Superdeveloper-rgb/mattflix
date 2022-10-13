@@ -2,60 +2,52 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
-import Errorbox from "../components/Errorbox";
+import Popup from "../components/popup";
 
 export default function loginPage() {
-  const [email, setEmail] = useState("");
-  const [submitted, submit] = useState(false);
-  const [error, setError] = useState(false)
+  const [submitted, submit] = useState();
+  const [error, setError] = useState(false);
+  const [popup, setpopup] = useState()
   const router = useRouter();
   const loginbtn = useRef(null);
+  const emailInput = useRef(null)
   if (supabase.auth.session()) router.push("/profile");
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      handleAuthChange(event, session)
-      if (event === 'SIGNED_IN') {
-        if (window.location.pathname === "/login" && supabase.auth.user()) router.push('/profile');
-      }
-    })
-    return () => {
-      authListener.unsubscribe()
+    let url = new URL(window.location.href)
+    if (url.hash && url.hash.split('&')[2]?.split('=')[0] === "error_description") {
+      let error = url.hash?.split('&')[2]?.split('=')[1]?.replaceAll('+', ' ')
+      if (error) setpopup(error);
     }
-  }, [])
-  async function handleAuthChange(event, session) {
-    await fetch('/api/auth', {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      credentials: 'same-origin',
-      body: JSON.stringify({ event, session }),
-    })
-  }
+  })
 
   async function login() {
     setError(false);
+    let email = emailInput.current.value;
     if (!email) return setError("Please enter your email adress")
     if (!/[a-z0-9_\.]+@[a-z]+\.[a-z]{2,5}/.test(email)) return setError("Are you sure that's your email? It seems off...")
     loginbtn.current.disabled = true;
     loginbtn.current.children[0].className = "fas fa-circle-notch";
     const { error, data } = await supabase.auth.signIn({ email }, { redirectTo: "http://localhost:3000/login" })
     if (error) {
+      setError(error.message);
       loginbtn.current.disabled = false;
       loginbtn.current.children[0].className = "fas fa-arrow-right";
     } else {
-      submit(true);
+      submit({ email });
     }
   }
 
   return !submitted ? (
     <section className={styles.container}>
       <div className={styles.textwrapper}>
+        {popup && <Popup open={true} title={popup} actions={{ close: () => { setpopup(false); router.push("/login") } }} />}
         <h1>Sign in to Mattflix</h1>
         <p>Enter your email and we'll send you a one-time link to login or signup, no password needed!</p>
         <br />
         <br />
         <span className={error ? styles.shake : undefined}>
           <input
-            onChange={e => { setEmail(e.target.value); (error && setError(false)) }}
+            ref={emailInput}
             onKeyDown={(e) => { if (e.key === "Enter") login() }}
             type="email"
             placeholder="email"
@@ -77,7 +69,7 @@ export default function loginPage() {
     <section className={styles.container}>
       <div className={styles.textwrapper}>
         <h1>Almost there!</h1>
-        <p>A magic link has been sent to {email}, check your inbox to sign in</p>
+        <p>A magic link has been sent to {submitted.email}, check your inbox to sign in</p>
         <a href="/login" style={{ textDecoration: "underline" }}>I didn't receive a link</a>
       </div>
     </section>

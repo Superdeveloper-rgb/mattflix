@@ -107,6 +107,7 @@ export default function uploadPage({ user, authError }) {
             })
             updateprogress({status: "Success!"})
         } catch (error) {
+            updateprogress({status: "not_started"})
             setError({title: String(error.title || ""), msg: String(error.msg || error)})
         }
     }
