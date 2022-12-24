@@ -13,7 +13,7 @@ export default function Home(props) {
   if (!props.titles || props.error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(props.error).length > 0 ?  JSON.stringify(props.error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
-  useEffect(()=>setRowLimit(Math.floor(width/150)))
+  useEffect(()=>setRowLimit(Math.ceil(width/150)+1))
   
   const featuredRow = props.titles[rowLimit * 2];
   const featuredTitle = props.titles[props.featuredTitle];

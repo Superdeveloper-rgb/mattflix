@@ -33,7 +33,7 @@ export default function Nav() {
                 {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>)
                     : (<li><Link href="/login"><a className={styles.login}>Login</a></Link></li>)}
             </ol>
-            {width <= 500 && <button className={styles.dropdown} onClick={() => setOpen(prev => !prev)}>{isOpen ? "x" : (router.asPath.replace(/[^a-zA-Z]/g, "") || "home") + " \uf078"}</button>}
+            {width <= 500 && <button className={styles.dropdown} onClick={() => setOpen(prev => !prev)}>{isOpen ? "\u2715" : (router.asPath.replace(/\/|-(?:[0-9])+$/gm, "").replace(/[^a-zA-Z]/g, " ") || "home") + " \uf078"}</button>}
         </nav>
     )
 }

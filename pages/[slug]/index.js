@@ -7,6 +7,7 @@ import { makeSerializable } from "../../lib/utils";
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function detailsPage({ title, related, error }) {
     const [animated, animate] = useState(false);
@@ -20,8 +21,11 @@ export default function detailsPage({ title, related, error }) {
             router.push(`${router.asPath}/watch`)
         }, 1500);
     }
-    if(error) return (<Errorbox title={"content not found"} message={error} code={404} options={["reload"]}/>)
+    if (error) return (<Errorbox title={"content not found"} message={error} code={404} options={["reload"]} />)
     return (<>
+        <Head>
+            <title>{title.title} on Mattflix</title>
+        </Head>
         <section style={{ backgroundImage: `url(${title.banner_url})`, backgroundSize: "cover", backgroundPosition: "center", }} >
             <div className={animated ? [rows.infoBanner, rows.zoom].join(' ') : rows.infoBanner}>
                 <ContentCard src={title.poster_url} />
@@ -61,7 +65,7 @@ export async function getServerSideProps(context) {
             tags: true
         }
     })
-    if(!titleInfo) return {props: {error: "Couldn't find this content :("}}
+    if (!titleInfo) return { props: { error: "Couldn't find this content :(" } }
     const related = await prisma.content.findMany({
         where: {
             tags: {

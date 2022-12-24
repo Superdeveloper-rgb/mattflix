@@ -69,7 +69,7 @@ export default function loginPage() {
     <section className={styles.container}>
       <div className={styles.textwrapper}>
         <h1>Almost there!</h1>
-        <p>A magic link has been sent to {submitted.email}, check your inbox to sign in</p>
+        <p>A magic link has been sent to {submitted.email}, check your inbox for an email from "noreply@mail.app.supabase.io."</p>
         <a href="/login" style={{ textDecoration: "underline" }}>I didn't receive a link</a>
       </div>
     </section>
