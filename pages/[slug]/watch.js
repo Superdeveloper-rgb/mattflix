@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import prisma from "../../lib/prisma";
 import { makeSerializable } from "../../lib/utils";
 import styles from "../../styles/videoPlayer.module.css";
+import Head from "next/head";
 
 export default function watch(props) {
     const router = useRouter()
@@ -27,6 +28,9 @@ export default function watch(props) {
     //     window.addEventListener("click", showBackBtn)
     // })
     return (<>
+        <Head>
+            <title>Watching {props.title} on Mattflix</title>
+        </Head>
         <span className={styles.backArrow} onClick={()=>router.back()}><i className="fas fa-arrow-left"/>&nbsp;Back</span>
         <div className={styles.loader}></div>
         <div className={classes}><iframe src={`https://iframe.mediadelivery.net/embed/${process.env.NEXT_PUBLIC_bunny_library_id}/${props.bunny_id}?autoplay=true`} loading="lazy" style={{border: "none", position: "absolute", top: 0, height: "100%", width: "100%"}} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowFullScreen={true}></iframe></div>
@@ -36,7 +40,7 @@ export default function watch(props) {
 export async function getServerSideProps(context) {
     const title = await prisma.content.findUnique({
         where: { slug: context.query.slug },
-        select: {bunny_id: true}
+        select: {bunny_id: true, title: true}
     })
     return (
         { props: makeSerializable(title) }
