@@ -2,12 +2,14 @@ import styles from "../styles/nav.module.css"
 import Link from "next/link";
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react";
-import { useAuth } from "../lib/utils";
+import { joinClasses, useAuth, useScreenSize } from "../lib/utils";
 
 export default function Nav() {
     const [user] = useAuth();
     const [scroll, setScroll] = useState(0);
     const [transparency, setTransparency] = useState(true);
+    const [isOpen, setOpen] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -19,17 +21,19 @@ export default function Nav() {
     useEffect(() => {
         (scroll > 0) ? setTransparency(false) : setTransparency(true);
     }, [scroll]);
+    let [width] = useScreenSize();
 
 
     return (
-        <nav className={transparency ? styles.mainNav : [styles.mainNav, styles.scrolled].join(" ")}>
+        <nav className={transparency ? styles.mainNav : joinClasses(styles.mainNav, styles.scrolled)}>
             <Link href="/"><a><img src="/mattflix.png" className={styles.logo} /></a></Link>
-            <ol className={styles.linkContainer}>
-                <Navlink href="/" nextLink>Browse</Navlink>
+            <ol className={joinClasses(styles.linkContainer, (isOpen ? styles.open : ""))} onClick={()=>setOpen(prev => !prev)}>
+                <Navlink href="/browse" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New</Navlink>
-                {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`}/></a></Link></li>)
-                : (<li><Link href="/login"><a className={styles.login}>Login</a></Link></li>)}
+                {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>)
+                    : (<li><Link href="/login"><a className={styles.login}>Login</a></Link></li>)}
             </ol>
+            {width <= 500 && <button className={styles.dropdown} onClick={() => setOpen(prev => !prev)}>{isOpen ? "x" : (router.asPath.replace(/[^a-zA-Z]/g, "") || "home") + " \uf078"}</button>}
         </nav>
     )
 }

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export default function PageLayout({ children }) {
     const router = useRouter();    
-    const paddingTop = ["/new", "/upload"].includes(router.pathname) ? '80px' : undefined;
+    const paddingTop = ["/new", "/upload", "/"].includes(router.pathname) ? '80px' : undefined;
     const noNavRoutes = ['/[slug]/watch'];
     return (
         <>

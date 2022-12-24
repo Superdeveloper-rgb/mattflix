@@ -27,6 +27,9 @@
     font-size: 1em;
     color: white;
 }
+.container label {
+    margin: 10px 0;
+}
 .emailInput {
     margin-right: 0;
     border-radius: 10px 0 0 10px;
