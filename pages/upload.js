@@ -15,9 +15,9 @@ export default function uploadPage({ user, authError }) {
     const [width] = useScreenSize();
     const videoInput = useRef();
     const bannerInput = useRef();
-    const posterInput = useRef();    
-    const uploadButton = useRef();    
-    const [progress, updateprogress] = useReducer(objectReducer, {percent: 0, status: "not_started"})
+    const posterInput = useRef();
+    const uploadButton = useRef();
+    const [progress, updateprogress] = useReducer(objectReducer, { percent: 0, status: "not_started", url: "" })
     const [meta, updatemeta] = useReducer(objectReducer, {
         title: "",
         summary: "",
@@ -63,7 +63,7 @@ export default function uploadPage({ user, authError }) {
             updatemeta({ tags })
         }
     }
-    function validateForm(){
+    function validateForm() {
         if (!videoInput.current.files[0]) return "no video selected"
         if (!bannerInput.current.files[0]) return "no banner selected"
         if (!["image/png", "image/jpeg", "image/gif", "image/webp"].includes(bannerInput.current.files[0].type)) return "bad banner image format"
@@ -73,17 +73,27 @@ export default function uploadPage({ user, authError }) {
         return true;
     }
 
-    useEffect(()=>{
-            validateForm() === true ? (uploadButton.current.disabled = false) : (uploadButton.current.disabled = true);
+    useEffect(() => {
+        validateForm() === true ? (uploadButton.current.disabled = false) : (uploadButton.current.disabled = true);
     }, [meta, preview])
+
+    async function uploadedTitleSlug() {
+        let { data: content, error } = await supabase
+            .from('content')
+            .select('slug')
+            .order('id', {ascending: false})
+            .range(0, 0);
+        console.log(content[0].slug);
+        return (content[0].slug);
+    }
 
     async function submit() {
         let validate = validateForm();
-        if(validate !== true) return setError({title: "Validation error", msg: validate})
+        if (validate !== true) return setError({ title: "Validation error", msg: validate })
 
         let videoId;
         try {
-            updateprogress({status: "upload_started"});
+            updateprogress({ status: "upload_started" });
 
             videoId = await uploader.createVideo(meta.title);
             updateprogress({status: "video_created"});
@@ -93,22 +103,23 @@ export default function uploadPage({ user, authError }) {
 
             let fileExt = posterInput.current.files[0].name.split(".")[1];
             const posterUrl = await uploader.uploadPoster((posterInput.current.files[0]), `${videoId}_poster.${fileExt}`)
-            updateprogress({status: "poster_uploaded"});
-            
+            updateprogress({ status: "poster_uploaded" });
+
             fileExt = bannerInput.current.files[0].name.split(".")[1];
             const bannerUrl = await uploader.uploadBanner(bannerInput.current.files[0], `${videoId}_banner.${fileExt}`)
-            updateprogress({status: "banner_uploaded"})
-            
+            updateprogress({ status: "banner_uploaded" })
+
             uploader.updateDatabase({
                 ...meta,
                 id: videoId,
                 posterUrl,
                 bannerUrl
             })
-            updateprogress({status: "Success!"})
+            updateprogress({ status: "Success!" })
+            updateprogress({ url:`http://localhost:3000/${await uploadedTitleSlug()}` })
         } catch (error) {
-            updateprogress({status: "not_started"})
-            setError({title: String(error.title || ""), msg: String(error.msg || error)})
+            updateprogress({ status: "not_started" })
+            setError({ title: String(error.title || ""), msg: String(error.msg || error) })
         }
     }
     return (<>
@@ -158,18 +169,19 @@ export default function uploadPage({ user, authError }) {
                 <label>Poster Image: <input type="file" id="posterimgInput" onChange={previewFile} accept=".png, .jpg, .jpeg, .webp, .gif" ref={posterInput} /></label>
             </form>
             <button className={formStyles.uploadbtn} onClick={submit} ref={uploadButton}>Upload!</button>
-            {!["not_started", "success", "done"].includes(progress.status) &&
+            {!["not_started", "Success!", "done"].includes(progress.status) &&
                 <Popup
                     title={"Launching... 🚀"}
                     body={`Current status: ${progress.status}`}
                     open={true}>
                     <progress style={{ width: "100%" }} />
                 </Popup>}
-            {progress.status === "success" &&
+            {progress.status === "Success!" &&
                 <Popup
                     title={"Upload successful! 🎉"}
                     open={progress.status !== "done"}
-                    actions={{ Done: () => updateprogress({ status: "done" }) }} />}
+                    actions={{ Done: () => updateprogress({ status: "done" }) }}
+                    body={<a href={progress.url} style={{color: "white"}}>See it live →</a>} />}
         </section>
 
         <pre style={{ width: "90%", overflow: "scroll", margin: "auto" }}>

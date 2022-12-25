@@ -28,6 +28,7 @@ export default function Nav() {
         <nav className={transparency ? styles.mainNav : joinClasses(styles.mainNav, styles.scrolled)}>
             <Link href="/"><a><img src="/mattflix.png" className={styles.logo} /></a></Link>
             <ol className={joinClasses(styles.linkContainer, (isOpen ? styles.open : ""))} onClick={()=>setOpen(prev => !prev)}>
+                <Navlink href="/" nextLink>Home</Navlink>
                 <Navlink href="/browse" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New</Navlink>
                 {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>)
