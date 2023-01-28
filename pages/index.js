@@ -3,8 +3,10 @@ import rows from "../styles/rows.module.css";
 import { useScreenSize } from "../lib/utils";
 import { makeSerializable } from "../lib/utils";
 import ContentCard from "../components/ContentCard";
-export default function homePage({ titles }) {
+import Errorbox from "../components/Errorbox";
+export default function homePage({ titles, error }) {
     let [width] = useScreenSize();
+    if (!titles || error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(error).length > 0 ?  JSON.stringify(error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
     return (
         <>
             <header style={{ position: "absolute", color: "white", top: 0 }}>
@@ -25,12 +27,12 @@ export default function homePage({ titles }) {
                         return <ContentCard src={"/content-placeholder.png"} key={title.slug} />
                     })}
                 </section>
-                <h1 style={{ fontSize: "4vw", marginTop: "100px", textAlign: "center" }}>All your favorites, all in one place.</h1>
-                <p style={{ margin: "auto", width: "60%", textAlign: "center", maxWidth: "500px", fontSize: "15px" }}>Don't scramble around looking for my content, it's all here and ready for you when you want it (so all day every day).</p>
-                <section style={{display: "flex", flexFlow: "row nowrap", justifyContent: "space-around", marginTop: "300px"}}>
-                    <div style={{width: "100px", height: "100px", backgroundColor: "red"}}></div>
-                    <div style={{width: "100px", height: "100px", backgroundColor: "red"}}></div>
-                    <div style={{width: "100px", height: "100px", backgroundColor: "red"}}></div>
+                <h1 style={{fontSize: (width > 500 ? "4vw" : "6vw"), marginTop: "100px", textAlign: "center" }}>All your favorites, all in one place.</h1>
+                <p style={{ margin: "auto", width: "60%", textAlign: "center", maxWidth: "500px", fontSize: (width > 500 ? "2vw" : "4vw"), lineHeight: "1.3em" }}>Don't scramble around looking for my content, it's all here and ready for you when you want it (so all day every day).</p>
+                <section style={{display: "grid", [(width > 500 ? "gridTemplateColumns" : "gridTemplateRows")]: "auto auto auto", marginTop: "200px", width: "100%", alignItems: "center", justifyItems: "center", padding: "0 50px", justifyContent: "center", gap: "50px"}}>
+                    <div style={{width: "20vw", height: "200px", backgroundColor: "red", borderRadius: "20px"}}></div>
+                    <div style={{width: "20vw", height: "200px", backgroundColor: "red", borderRadius: "20px"}}></div>
+                    <div style={{width: "20vw", height: "200px", backgroundColor: "red", borderRadius: "20px"}}></div>
                 </section>
             </article>
         </>
@@ -52,6 +54,7 @@ export async function getServerSideProps() {
             }
         }
     } catch (error) {
+        if(error.clientVersion) error = {};
         return { props: { error: makeSerializable(error) } }
     }
 }

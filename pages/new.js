@@ -4,12 +4,14 @@ import Info from '../components/Info';
 import FeatureRow from '../components/FeatureRow';
 import ClickableCard from '../components/ClickableCard';
 import ContentCard from '../components/ContentCard';
+import Errorbox from '../components/Errorbox';
 import prisma from '../lib/prisma';
 import { useScreenSize } from '../lib/utils';
 import { makeSerializable } from '../lib/utils';
 import rows from '../styles/rows.module.css'
 
 export default function newPage(props) {
+  if (!props.titles) return <Errorbox options={["reload"]} title={"Servor error"} message={"There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
   useEffect(()=>setRowLimit(Math.floor(width/150)))

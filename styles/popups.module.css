@@ -8,6 +8,7 @@
     box-shadow: 0 0 10px rgb(8, 8, 8);
     border-radius: 10px;
     z-index: 2;
+    max-width: 400px;
 }
 .title {
     color: var(--mattflix-red);
