@@ -32,7 +32,7 @@ export default function Nav() {
             <ol className={joinClasses(styles.linkContainer, (isOpen ? styles.open : ""))} onClick={()=>setOpen(prev => !prev)}>
                 {user ? (<>
 
-                <Navlink href="/browse" nextLink>Featured</Navlink>
+                <Navlink href="/browse" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New & Hot</Navlink>
                 <Navlink href="/documentaries" nextLink>Documentaries</Navlink>
                 <li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>
