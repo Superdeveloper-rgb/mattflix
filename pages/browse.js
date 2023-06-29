@@ -9,7 +9,6 @@ import prisma from '../lib/prisma';
 import supabase from '../lib/supabaseClient'
 import { useEffect, useState } from 'react'
 import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
-import Footer from '../components/footer'
 
 export default function Home(props) {
   if (!props.titles || props.error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(props.error).length > 0 ?  JSON.stringify(props.error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
@@ -56,7 +55,6 @@ export default function Home(props) {
           return <Link href={title.slug} key={title.slug}><a><ContentCard src={title.poster_url} /></a></Link>
         })}
       </section>
-      <Footer/>
     </>
   )
 }

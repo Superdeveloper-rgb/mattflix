@@ -4,7 +4,6 @@ import Link from "next/link";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
 import Head from "next/head";
-import Footer from "../components/footer";
 
 export default function profilePage() {
     const router = useRouter();
@@ -69,7 +68,6 @@ export default function profilePage() {
                 <button onClick={logout} className={[styles.primarybtn, styles.actionbtn].join(' ')} disabled={state.waiting}>Sign Out</button>
             </div>
             {profile.user_metadata.role === "admin" && <Link href="/upload"><a>Upload <i className="fas fa-cloud-upload-alt" /></a></Link>}
-            <Footer/>
         </section>
     )
 }
