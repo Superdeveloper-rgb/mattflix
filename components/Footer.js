@@ -23,31 +23,19 @@ export default function Footer(props) {
           <h2>Browse</h2>
           <ul>
             <li>
-              {props.linksInactive ? (
-                "Featured"
-              ) : (
-                <Link href="/browse">
-                  <a>Browse</a>
-                </Link>
-              )}
+              <Link href="/browse">
+                <a>Browse</a>
+              </Link>
             </li>
             <li>
-              {props.linksInactive ? (
-                "New"
-              ) : (
-                <Link href="/new">
-                  <a>New</a>
-                </Link>
-              )}
+              <Link href="/new">
+                <a>New</a>
+              </Link>
             </li>
             <li>
-              {props.linksInactive ? (
-                "Documentaries"
-              ) : (
-                <Link href="/documentaries">
-                  <a>Documentaries</a>
-                </Link>
-              )}
+              <Link href="/documentaries">
+                <a>Documentaries</a>
+              </Link>
             </li>
           </ul>
         </div>
