@@ -20,7 +20,7 @@ export default function newPage(props) {
 
   return (<>
     <Head>
-      <title>New stuff - Mattflix</title>
+      <title>Documentaries - Mattflix</title>
     </Head>
     <section className={rows.largeFeature}>
       <ContentCard src={props.titles[0].banner_url} />
@@ -53,7 +53,10 @@ export async function getServerSideProps({req}) {
   }
   try {
     const titles = await prisma.content.findMany({
-      where: {public: true},
+      where: {
+        public: true,
+        tags: { has: "documentary"},
+      },
       orderBy: {
         created_at: "desc"
       }

@@ -6,6 +6,7 @@ import Info from '../components/Info'
 import Errorbox from '../components/Errorbox'
 import ContentCard from '../components/ContentCard'
 import prisma from '../lib/prisma';
+import supabase from '../lib/supabaseClient'
 import { useEffect, useState } from 'react'
 import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
 
@@ -58,9 +59,18 @@ export default function Home(props) {
 }
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req}) {
+  const { user } = await supabase.auth.api.getUserByCookie(req);
+  if (!user) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
   try {
-    throw "preview mode"
+    // throw "preview mode"
     const titles = await prisma.content.findMany({where: {public: true}});
     return {
       props: {

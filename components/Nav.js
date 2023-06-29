@@ -26,13 +26,22 @@ export default function Nav() {
 
     return (
         <nav className={transparency ? styles.mainNav : joinClasses(styles.mainNav, styles.scrolled)}>
-            <Link href="/"><a><img src="/mattflix.png" className={styles.logo} /></a></Link>
+            <Link href="/browse"><a style={{cursor: "pointer", display: "flex", alignItems: "center", height: "100%"}}>
+                <img src="/mattflix.png" className={styles.logo} />
+            </a></Link>
             <ol className={joinClasses(styles.linkContainer, (isOpen ? styles.open : ""))} onClick={()=>setOpen(prev => !prev)}>
-                <Navlink href="/" nextLink>Home</Navlink>
-                <Navlink href="/browse" nextLink>Browse</Navlink>
-                <Navlink href="/new" nextLink>New</Navlink>
-                {user ? (<li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>)
-                    : (<li><Link href="/login"><a className={styles.login}>Login</a></Link></li>)}
+                {user ? (<>
+
+                <Navlink href="/browse" nextLink>Featured</Navlink>
+                <Navlink href="/new" nextLink>New & Hot</Navlink>
+                <Navlink href="/documentaries" nextLink>Documentaries</Navlink>
+                <li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>
+
+                </>) : (
+
+                <li><Link href="/login"><a className={styles.login}>Login</a></Link></li>
+
+                )}
             </ol>
             {width <= 500 && <button className={styles.dropdown} onClick={() => setOpen(prev => !prev)}>{isOpen ? "\u2715" : (router.asPath.replace(/\/|-(?:[0-9])+$/gm, "").replace(/[^a-zA-Z]/g, " ") || "home") + " \uf078"}</button>}
         </nav>
