@@ -11,7 +11,7 @@ export default function loginPage() {
   const router = useRouter();
   const loginbtn = useRef(null);
   const emailInput = useRef(null)
-  if (supabase.auth.session()) router.push("/profile");
+  if (supabase.auth.session()) router.replace("/profile");
   useEffect(() => {
     let url = new URL(window.location.href)
     if (url.hash && url.hash.split('&')[2]?.split('=')[0] === "error_description") {
