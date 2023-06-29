@@ -30,7 +30,6 @@ export default function Home(props) {
         <Info title={featuredTitle.title} description={featureDesc} cid={featuredTitle.slug} links />
       </header>
 
-      <Link href="/#pricing" scroll={false}><a>Plans</a></Link>
       <section className={rows.shelf}>
         {props.titles.slice(0, (rowLimit)).map((title) => {
           return <Link href={title.slug} key={title.id}><a><ContentCard src={title.poster_url} /></a></Link>
