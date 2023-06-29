@@ -12,6 +12,10 @@
   overflow-x: scroll;
   --spacing: 40px;
 }
+.shelf.centered {
+  column-gap: 10%;
+  margin: auto;
+}
 .shelf .contentCard {
   width: 100%;
   height: 100%;

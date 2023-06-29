@@ -10,6 +10,7 @@ import { useScreenSize } from '../lib/utils';
 import { makeSerializable } from '../lib/utils';
 import rows from '../styles/rows.module.css'
 import supabase from '../lib/supabaseClient';
+import Footer from '../components/footer';
 
 export default function newPage(props) {
   if (!props.titles) return <Errorbox options={["reload"]} title={"Servor error"} message={"There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
@@ -37,7 +38,7 @@ export default function newPage(props) {
       })}
     </section>
     {featureRow && <FeatureRow title={featureRow.title} description={featureRow.summary} cid={featureRow.slug} poster={featureRow.poster_url}/>}
-
+    <Footer/>
   </>)
 }
 
