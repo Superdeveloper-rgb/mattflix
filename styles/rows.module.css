@@ -3,8 +3,8 @@
   width: 100%;
   display: grid;
   color: var(--text);
-  grid-auto-columns: var(--card-width);
-  grid-auto-rows: var(--card-height);
+  grid-auto-columns: var(--card-height);
+  grid-auto-rows: var(--card-width);
   grid-auto-flow: column;
   column-gap: var(--spacing);
   margin: 20px 0;
@@ -85,7 +85,7 @@
 .largeFeature .contentCard {
   width: 100%;
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--card-aspect-ratio);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -107,7 +107,7 @@
   position: relative;
   height: 100%;
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--card-aspect-ratio);
 }
 
 .thumbnailSlider .contentCard::before {

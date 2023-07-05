@@ -37,8 +37,8 @@ h1 {
   --mattflix-red: rgb(202, 53, 52);
   --link: rgb(43, 139, 208);
   --text: rgb(210, 210, 210);
-  --card-width: 150px;
-  --card-height: 266.67px;
+  --card-width: 13.5vw;
+  --card-height: 23.11vw;
   --card-aspect-ratio: 9 / 16;
 }
 

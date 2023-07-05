@@ -83,7 +83,6 @@ export default function uploadPage({ user, authError }) {
             .select('slug')
             .order('id', {ascending: false})
             .range(0, 0);
-        console.log(content[0].slug);
         return (content[0].slug);
     }
 
@@ -158,7 +157,7 @@ export default function uploadPage({ user, authError }) {
 
 
             <form className={joinClasses(formStyles.form, formStyles.rightPanel)}>
-                <label htmlFor="videoInput" className={formStyles.fileSelector} onDragEnter={(e) => e.target.style = "border: 3px solid var(--theme-color)"} onDragLeave={(e) => e.target.style = "border: none"} onDrop={(e) => { e.preventDefault(); e.stopPropagation(); console.log(e.dataTransfer) }}>
+                <label htmlFor="videoInput" className={formStyles.fileSelector} onDragEnter={(e) => e.target.style = "border: 3px solid var(--theme-color)"} onDragLeave={(e) => e.target.style = "border: none"} onDrop={(e) => { e.preventDefault(); e.stopPropagation(); }}>
                     {preview.video ?
                         <video src={preview.video} controls playsInline className={formStyles.previewfile} /> :
                         <i className="fas fa-cloud-upload-alt" />}
