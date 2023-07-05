@@ -22,7 +22,7 @@ export default function homePage({ titles, error }) {
             <div style={{ marginLeft: "10%", position: "absolute", top: (width > 500 ? "20vw" : "20vh") }}>
                 <h1 style={{ fontSize: (width > 500 ? "4vw" : "8vw"), margin: "10px 0 0 0" }}>This is</h1>
                 <img src="/mattflix.png" style={{ width: (width > 500 ? "20vw" : "40vw") }}></img>
-                <p style={{ margin: "0 0 10px 0", fontSize: (width > 500 ? "2vw" : "4vw") }}>Quality content, inspiring CREATORS</p>
+                <p style={{ margin: "0 0 10px 0", fontSize: (width > 500 ? "2vw" : "4vw") }}>Quality content, inspiring creators</p>
             </div>
             <article className={styles.container} style={{ position: "relative", top: (width > 500 ? "40vw" : "80vw"), height: "fit-content" }}>
                 <section className={joinClasses(rows.shelf, rows.centered)} style={{ paddingLeft: "5vw", marginTop: "10vw" }}>
