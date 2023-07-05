@@ -30,9 +30,9 @@ export default function homePage({ titles, error }) {
                         return <ContentCard src={title.poster_url} key={title.title} />
                     })}
                 </section>
-                <section style={{ margin: "250px 100px" }} className={styles.textCTA}>
+                <section style={{ margin: "250px 100px" }} className={styles.container}>
                     <h1>All your favorites, all in one place.</h1>
-                    <p>Don't scramble around looking for something to good to watch, it's all here and ready for you all day every day.</p>
+                    <p>Don't scramble around looking for something good to watch, it's all here and ready for you all day every day.</p>
                 </section>
 
                 <section className={styles.threeColumnLayout} style={{ padding: "200px 0" }}>
@@ -59,7 +59,7 @@ export default function homePage({ titles, error }) {
                         <p>100% of people whom we like are happy with Mattflix</p>
                     </div>
                 </section>
-                <section style={{  boxShadow: "20vw 0 400px 0 rgb(0, 0, 0) inset", padding: "200px 0", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: 'url("/globe.webp")' }}>
+                <section style={{ boxShadow: "20vw 0 400px 0 rgb(0, 0, 0) inset", padding: "200px 0", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: 'url("/globe.webp")' }}>
                     <div className={styles.halfContainer}>
                         <h1 style={{ textAlign: "left", padding: "0 100px" }}>Not just content, but community.</h1>
                         <p style={{ textAlign: "left", lineHeight: "1.3em", padding: "0 100px" }}>
@@ -68,7 +68,11 @@ export default function homePage({ titles, error }) {
                     </div>
                 </section>
                 <h1 id="pricing" style={{ textAlign: "center", margin: "30px" }}>Pricing</h1>
-                <section className={styles.threeColumnLayout} style={{ backgroundColor: "initial", marginTop: "0", marginBottom: "150px" }}>
+                <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                <stripe-pricing-table pricing-table-id="prctbl_1NQabwGtJSzHl0iWp7aGgZ2B"
+                    publishable-key="pk_test_51LpdQkGtJSzHl0iWCaofHTerj3kXP8ti8c2VzHwjZK0gLvdR0tCiVqGWBOcWQa82jF3xglZGMJi0Rc0YzfiRaMdQ00FZ8gjAMD">
+                </stripe-pricing-table>
+                {/* <section className={styles.threeColumnLayout} style={{ backgroundColor: "initial", marginTop: "0", marginBottom: "150px" }}>
                     <div className={styles.pricingBox}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="164.191" height="164.19" viewBox="0 0 164.191 164.19" style={{ width: "100px", height: "100px" }}>
                             <path id="Exclusion_3" data-name="Exclusion 3" d="M81.6,163.19a82.209,82.209,0,0,1-16.444-1.658,81.142,81.142,0,0,1-29.177-12.278,81.837,81.837,0,0,1-29.563-35.9A81.2,81.2,0,0,1,1.658,98.04a82.392,82.392,0,0,1,0-32.889A81.141,81.141,0,0,1,13.935,35.975a81.838,81.838,0,0,1,35.9-29.563A81.2,81.2,0,0,1,65.151,1.658a82.389,82.389,0,0,1,32.889,0,81.139,81.139,0,0,1,29.176,12.277,81.837,81.837,0,0,1,29.563,35.9,81.2,81.2,0,0,1,4.754,15.316,82.4,82.4,0,0,1,0,32.889,81.142,81.142,0,0,1-12.278,29.176,81.837,81.837,0,0,1-35.9,29.562,81.187,81.187,0,0,1-15.316,4.754A82.209,82.209,0,0,1,81.6,163.19Zm-8.386-60.629H89.982a12.579,12.579,0,0,0,25.159,0h6.29a2.1,2.1,0,0,0,2.1-2.1V96.27a2.1,2.1,0,0,0-2.1-2.1h-2.1V80.009a6.326,6.326,0,0,0-1.848-4.442L104.4,62.477a6.33,6.33,0,0,0-4.442-1.848H94.175V54.34a6.3,6.3,0,0,0-6.29-6.289H54.341a6.3,6.3,0,0,0-6.29,6.289v6.289H40.713a1.05,1.05,0,0,0-1.048,1.048v2.1a1.049,1.049,0,0,0,1.048,1.048H76.355A1.049,1.049,0,0,1,77.4,65.871v2.1a1.05,1.05,0,0,1-1.048,1.048H44.906a1.05,1.05,0,0,0-1.048,1.048v2.1a1.049,1.049,0,0,0,1.048,1.048H72.161a1.049,1.049,0,0,1,1.048,1.048v2.1A1.05,1.05,0,0,1,72.161,77.4H40.713a1.05,1.05,0,0,0-1.048,1.048v2.1a1.049,1.049,0,0,0,1.048,1.048H67.968a1.049,1.049,0,0,1,1.048,1.048v2.1a1.05,1.05,0,0,1-1.048,1.048H48.051v16.773a12.579,12.579,0,0,0,25.158,0Zm29.352,6.289a6.29,6.29,0,1,1,6.29-6.289A6.3,6.3,0,0,1,102.561,108.85Zm-41.93,0a6.29,6.29,0,1,1,6.289-6.289A6.3,6.3,0,0,1,60.63,108.85Zm52.414-27.256H94.175V66.919h5.779l13.09,13.09v1.585Z" transform="translate(0.5 0.5)" fill="#fff" />
@@ -96,8 +100,8 @@ export default function homePage({ titles, error }) {
                             <li>Show your love and support for creators by giving a bit extra</li>
                         </ul>
                         <button>Subscribe</button>
-                    </div>
-                    {/* <div className={styles.pricingBox}>
+                    </div> 
+                    <div className={styles.pricingBox}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="164.191" height="164.19" viewBox="0 0 164.191 164.19" style={{ width: "100px", height: "100px" }}>
                             <path id="Exclusion_3" data-name="Exclusion 3" d="M81.6,163.19a82.209,82.209,0,0,1-16.444-1.658,81.142,81.142,0,0,1-29.177-12.278,81.837,81.837,0,0,1-29.563-35.9A81.2,81.2,0,0,1,1.658,98.04a82.392,82.392,0,0,1,0-32.889A81.141,81.141,0,0,1,13.935,35.975a81.838,81.838,0,0,1,35.9-29.563A81.2,81.2,0,0,1,65.151,1.658a82.389,82.389,0,0,1,32.889,0,81.139,81.139,0,0,1,29.176,12.277,81.837,81.837,0,0,1,29.563,35.9,81.2,81.2,0,0,1,4.754,15.316,82.4,82.4,0,0,1,0,32.889,81.142,81.142,0,0,1-12.278,29.176,81.837,81.837,0,0,1-35.9,29.562,81.187,81.187,0,0,1-15.316,4.754A82.209,82.209,0,0,1,81.6,163.19Zm-8.386-60.629H89.982a12.579,12.579,0,0,0,25.159,0h6.29a2.1,2.1,0,0,0,2.1-2.1V96.27a2.1,2.1,0,0,0-2.1-2.1h-2.1V80.009a6.326,6.326,0,0,0-1.848-4.442L104.4,62.477a6.33,6.33,0,0,0-4.442-1.848H94.175V54.34a6.3,6.3,0,0,0-6.29-6.289H54.341a6.3,6.3,0,0,0-6.29,6.289v6.289H40.713a1.05,1.05,0,0,0-1.048,1.048v2.1a1.049,1.049,0,0,0,1.048,1.048H76.355A1.049,1.049,0,0,1,77.4,65.871v2.1a1.05,1.05,0,0,1-1.048,1.048H44.906a1.05,1.05,0,0,0-1.048,1.048v2.1a1.049,1.049,0,0,0,1.048,1.048H72.161a1.049,1.049,0,0,1,1.048,1.048v2.1A1.05,1.05,0,0,1,72.161,77.4H40.713a1.05,1.05,0,0,0-1.048,1.048v2.1a1.049,1.049,0,0,0,1.048,1.048H67.968a1.049,1.049,0,0,1,1.048,1.048v2.1a1.05,1.05,0,0,1-1.048,1.048H48.051v16.773a12.579,12.579,0,0,0,25.158,0Zm29.352,6.289a6.29,6.29,0,1,1,6.29-6.289A6.3,6.3,0,0,1,102.561,108.85Zm-41.93,0a6.29,6.29,0,1,1,6.289-6.289A6.3,6.3,0,0,1,60.63,108.85Zm52.414-27.256H94.175V66.919h5.779l13.09,13.09v1.585Z" transform="translate(0.5 0.5)" fill="#fff" />
                         </svg>
@@ -109,8 +113,8 @@ export default function homePage({ titles, error }) {
                             <li>Benefits</li>
                         </ul>
                         <button>Subscribe</button>
-                    </div> */}
-                </section>
+                    </div>
+                </section> */}
                 <Footer linksInactive></Footer>
             </article>
         </>
