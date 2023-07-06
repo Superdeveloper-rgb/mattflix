@@ -25,8 +25,8 @@ export default function UploadPage({ user, authError }) {
         public: true,
     });
     const [preview, updatePreview] = useReducer(objectReducer, {
-        banner: "http://localhost:3000/OG_IMG.png",
-        poster: "http://localhost:3000/content-placeholder.png",
+        banner: "http://www.mattflix.pro/OG_IMG.png",
+        poster: "http://www.mattflix.pro/content-placeholder.png",
         video: ""
     })
     function previewFile(e) {
@@ -114,7 +114,7 @@ export default function UploadPage({ user, authError }) {
                 bannerUrl
             })
             updateprogress({ status: "Success!" })
-            updateprogress({ url:`http://localhost:3000/${await uploadedTitleSlug()}` })
+            updateprogress({ url:`http://www.mattflix.pro/${await uploadedTitleSlug()}` })
         } catch (error) {
             updateprogress({ status: "not_started" })
             setError({ title: String(error.title || ""), msg: String(error.msg || error) })

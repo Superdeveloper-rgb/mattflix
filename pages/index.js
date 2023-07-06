@@ -7,11 +7,16 @@ import Errorbox from "../components/Errorbox";
 import styles from "../styles/landing.module.css"
 import { joinClasses } from "../lib/utils";
 import Footer from "../components/Footer";
+import Head from "next/head";
+
 export default function HomePage({ titles, error }) {
     let [width] = useScreenSize();
     if (!titles || error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(error).length > 0 ? JSON.stringify(error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"} />
     return (
         <>
+            <Head>
+                <title>Welcome to Mattflix</title>
+            </Head>
             <header style={{ position: "absolute", color: "white", top: 0 }}>
                 {width > 500 ? (
                     <video src="/welcome.mp4" muted autoPlay loop playsInline style={{ width: "100%" }}></video>
