@@ -27,7 +27,7 @@ export default function LoginPage() {
     if (!/[a-z0-9_\.]+@[a-z]+\.[a-z]{2,5}/.test(email)) return setError("Are you sure that's your email? It seems off...")
     loginbtn.current.disabled = true;
     loginbtn.current.children[0].className = "fas fa-circle-notch";
-    const { error, data } = await supabase.auth.signIn({ email }, { redirectTo: "http://localhost:3000/login" })
+    const { error, data } = await supabase.auth.signIn({ email }, { redirectTo: "http://mattflix.vercel.app/login" })
     if (error) {
       setError(error.message);
       loginbtn.current.disabled = false;
