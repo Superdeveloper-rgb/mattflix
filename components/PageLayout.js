@@ -1,7 +1,5 @@
 import Nav from "./Nav";
-import supabase from "../lib/supabaseClient";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export default function PageLayout({ children }) {
     const router = useRouter();    

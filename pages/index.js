@@ -6,7 +6,7 @@ import ContentCard from "../components/ContentCard";
 import Errorbox from "../components/Errorbox";
 import styles from "../styles/landing.module.css"
 import { joinClasses } from "../lib/utils";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import Image from "next/image";
 export default function HomePage({ titles, error }) {
     let [width] = useScreenSize();

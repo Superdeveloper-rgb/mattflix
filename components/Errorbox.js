@@ -1,5 +1,5 @@
 import styles from "../styles/popups.module.css"
-import Popup from "./popup"
+import Popup from "./Popup"
 import Link from "next/link"
 
 export default function Errorbox({title, message, code, options, action}) {

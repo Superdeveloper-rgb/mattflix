@@ -5,7 +5,7 @@ import infoStyles from "../styles/info.module.css"
 import formStyles from "../styles/forms.module.css"
 import ContentCard from "../components/ContentCard"
 import Errorbox from "../components/Errorbox"
-import Popup from "../components/popup";
+import Popup from "../components/Popup";
 import { useState, useRef, useReducer, useEffect } from "react";
 import { useScreenSize, joinClasses } from "../lib/utils";
 

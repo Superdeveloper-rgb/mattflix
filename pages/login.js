@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
-import Popup from "../components/popup";
+import Popup from "../components/Popup";
 import Link from "next/link";
 export default function LoginPage() {
   const [submitted, submit] = useState();
