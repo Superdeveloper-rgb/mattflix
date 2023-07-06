@@ -28,7 +28,7 @@ export default function Nav() {
     return (
         <nav className={transparency ? styles.mainNav : joinClasses(styles.mainNav, styles.scrolled)}>
             <Link href="/browse"><a style={{cursor: "pointer", display: "flex", alignItems: "center", height: "100%"}}>
-                <Image src="/mattflix.png" className={styles.logo} />
+                <Image src="/mattflix.png" className={styles.logo} width={126} height={40}/>
             </a></Link>
             <ol className={joinClasses(styles.linkContainer, (isOpen ? styles.open : ""))} onClick={()=>setOpen(prev => !prev)}>
                 {user ? (<>
@@ -36,7 +36,7 @@ export default function Nav() {
                 <Navlink href="/browse" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New & Hot</Navlink>
                 <Navlink href="/documentaries" nextLink>Documentaries</Navlink>
-                <li><Link href="/profile"><a><Image className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>
+                <li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>
 
                 </>) : (
 
