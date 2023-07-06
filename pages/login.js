@@ -69,8 +69,8 @@ export default function LoginPage() {
     <section className={styles.container}>
       <div className={styles.textwrapper}>
         <h1>Almost there!</h1>
-        <p>A magic link has been sent to {submitted.email}, check your inbox for an email from &quot;noreply@mail.app.supabase.io.&quot;</p>
-        <Link href="/login"><a  style={{ textDecoration: "underline" }}>I didn&apos;t receive a link</a></Link>
+        <p>A magic link has been sent to {submitted.email}, check your inbox (and spam/junk folder) for an email from &quot;hello@mattflix.pro&quot;</p>
+        <p  style={{ textDecoration: "underline", cursor: "pointer", color: "whitesmoke" }} onClick={()=>router.reload()}>I didn&apos;t receive a link</p>
       </div>
     </section>
   )

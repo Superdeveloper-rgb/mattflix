@@ -11,7 +11,7 @@ import Head from "next/head";
 
 export default function HomePage({ titles, error }) {
     let [width] = useScreenSize();
-    if (!titles || error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(error).length > 0 ? JSON.stringify(error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"} />
+    if (!titles || error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(error).length > 0 ? JSON.stringify(error) : "There was a problem fetching our awesome content from the server. (You're too hot to access this content). Please try again in a few minutes."} />
     return (
         <>
             <Head>

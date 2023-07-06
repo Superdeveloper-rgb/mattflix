@@ -20,12 +20,12 @@ a {
 
 @font-face {
   font-family: MattflixSans;
-  src: url('../public/fonts/NetflixSans_W_Rg.woff2');
+  src: url('https://mattflix.pro/fonts/NetflixSans_W_Rg.woff2');
 }
 @font-face {
   font-family: MattflixSans;
   font-weight: bold;
-  src: url('../public/fonts/NetflixSans_W_Md.woff2');
+  src: url('https://mattflix.pro/fonts/NetflixSans_W_Md.woff2');
 }
 h1 {
   font-size: 4vw;
