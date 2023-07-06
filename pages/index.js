@@ -121,7 +121,7 @@ export default function HomePage({ titles, error }) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     try {
         const titles = await prisma.content.findMany({
             where: { public: true },
@@ -134,7 +134,6 @@ export async function getStaticProps() {
             props: {
                 titles: makeSerializable(titles)
             },
-            revalidate: 1000,
         }
     } catch (error) {
         if (error.clientVersion) error = {};
