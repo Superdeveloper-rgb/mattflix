@@ -7,7 +7,8 @@ import Errorbox from "../components/Errorbox";
 import styles from "../styles/landing.module.css"
 import { joinClasses } from "../lib/utils";
 import Footer from "../components/footer";
-export default function homePage({ titles, error }) {
+import Image from "next/image";
+export default function HomePage({ titles, error }) {
     let [width] = useScreenSize();
     if (!titles || error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(error).length > 0 ? JSON.stringify(error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"} />
     return (
@@ -16,12 +17,12 @@ export default function homePage({ titles, error }) {
                 {width > 500 ? (
                     <video src="/welcome.mp4" muted autoPlay loop playsInline style={{ width: "100%" }}></video>
                 ) : (
-                    <img src="/welcome.jpg" style={{ width: "100%" }} />
+                    <Image src="/welcome.jpg" style={{ width: "100%" }} alt=""/>
                 )}
             </header>
             <div style={{ marginLeft: "10%", position: "absolute", top: (width > 500 ? "20vw" : "20vh") }}>
                 <h1 style={{ fontSize: (width > 500 ? "4vw" : "8vw"), margin: "10px 0 0 0" }}>This is</h1>
-                <img src="/mattflix.png" style={{ width: (width > 500 ? "20vw" : "40vw") }}></img>
+                <Image src="/mattflix.png" style={{ width: (width > 500 ? "20vw" : "40vw") }}></Image>
                 <p style={{ margin: "0 0 10px 0", fontSize: (width > 500 ? "2vw" : "4vw") }}>Quality content, inspiring creators</p>
             </div>
             <article className={styles.container} style={{ position: "relative", top: (width > 500 ? "40vw" : "80vw"), height: "fit-content" }}>
@@ -32,7 +33,7 @@ export default function homePage({ titles, error }) {
                 </section>
                 <section style={{ margin: "250px 100px" }} className={styles.container}>
                     <h1>All your favorites, all in one place.</h1>
-                    <p>Don't scramble around looking for something good to watch, it's all here and ready for you all day every day.</p>
+                    <p>Don&apos;t scramble around looking for something good to watch, it&apos;s all here and ready for you all day every day.</p>
                 </section>
 
                 <section className={styles.threeColumnLayout} style={{ padding: "200px 0" }}>

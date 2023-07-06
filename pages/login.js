@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
 import Popup from "../components/popup";
-
-export default function loginPage() {
+import Link from "next/link";
+export default function LoginPage() {
   const [submitted, submit] = useState();
   const [error, setError] = useState(false);
   const [popup, setpopup] = useState()
@@ -18,7 +18,7 @@ export default function loginPage() {
       let error = url.hash?.split('&')[2]?.split('=')[1]?.replaceAll('+', ' ')
       if (error) setpopup(error);
     }
-  })
+  }, [])
 
   async function login() {
     setError(false);
@@ -42,7 +42,7 @@ export default function loginPage() {
       <div className={styles.textwrapper}>
         {popup && <Popup open={true} title={popup} actions={{ close: () => { setpopup(false); router.push("/login") } }} />}
         <h1>Sign in to Mattflix</h1>
-        <p>Enter your email and we'll send you a one-time link to login or signup, no password needed!</p>
+        <p>Enter your email and we&apos;ll send you a one-time link to login or signup, no password needed!</p>
         <br />
         <br />
         <span className={error ? styles.shake : undefined}>
@@ -69,8 +69,8 @@ export default function loginPage() {
     <section className={styles.container}>
       <div className={styles.textwrapper}>
         <h1>Almost there!</h1>
-        <p>A magic link has been sent to {submitted.email}, check your inbox for an email from "noreply@mail.app.supabase.io."</p>
-        <a href="/login" style={{ textDecoration: "underline" }}>I didn't receive a link</a>
+        <p>A magic link has been sent to {submitted.email}, check your inbox for an email from &quot;noreply@mail.app.supabase.io.&quot;</p>
+        <Link href="/login"><a  style={{ textDecoration: "underline" }}>I didn&apos;t receive a link</a></Link>
       </div>
     </section>
   )

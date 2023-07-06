@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react'
 import { makeSerializable, useResponsiveDescription, useScreenSize } from '../lib/utils'
 
 export default function Home(props) {
-  if (!props.titles || props.error) return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(props.error).length > 0 ?  JSON.stringify(props.error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
   let [rowLimit, setRowLimit] = useState(5);
   let [width] = useScreenSize();
   useEffect(()=>setRowLimit( width < 500 ? Math.ceil(width/200)+1 : 5), [width])
@@ -19,6 +18,9 @@ export default function Home(props) {
   const featuredRow = props.titles[rowLimit * 2];
   const featuredTitle = props.titles[props.featuredTitle];
   let featureDesc = useResponsiveDescription(featuredTitle);
+  if (!props.titles || props.error) {
+    return <Errorbox options={["reload"]} title={"Servor error"} message={Object.keys(props.error).length > 0 ?  JSON.stringify(props.error) : "There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
+  }
   return (
     <>
       <Head>

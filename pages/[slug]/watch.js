@@ -5,7 +5,7 @@ import { makeSerializable } from "../../lib/utils";
 import styles from "../../styles/videoPlayer.module.css";
 import Head from "next/head";
 
-export default function watch(props) {
+export default function Watch(props) {
     const router = useRouter()
     let [classes, setClasses] = useState(styles.video);
     useEffect(()=>setClasses([styles.video, styles.in].join(' ')), []) // add "in" class on page load

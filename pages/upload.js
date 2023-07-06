@@ -9,7 +9,7 @@ import Popup from "../components/popup";
 import { useState, useRef, useReducer, useEffect } from "react";
 import { useScreenSize, joinClasses } from "../lib/utils";
 
-export default function uploadPage({ user, authError }) {
+export default function UploadPage({ user, authError }) {
     if (authError) return <Errorbox title="Unauthorized" message="You're not authorized to access this page :/" code={401} />
     const [error, setError] = useState("")
     const [width] = useScreenSize();

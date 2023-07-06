@@ -5,7 +5,7 @@ import supabase from "../lib/supabaseClient";
 import styles from "../styles/auth.module.css"
 import Head from "next/head";
 
-export default function profilePage() {
+export default function ProfilePage() {
     const router = useRouter();
     const [profile, setProfile] = useState(null);
     const [name, setName] = useState("");

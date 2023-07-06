@@ -11,13 +11,13 @@ import { makeSerializable } from '../lib/utils';
 import rows from '../styles/rows.module.css'
 import supabase from '../lib/supabaseClient';
 
-export default function newPage(props) {
-  if (!props.titles) return <Errorbox options={["reload"]} title={"Servor error"} message={"There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
+export default function Documentaries(props) {
   let [rowLimit, setRowLimit] = useState(10);
   let [width] = useScreenSize();
-  useEffect(()=>setRowLimit(Math.floor(width/150)))
+  useEffect(()=>setRowLimit(Math.floor(width/150)), [])
   let featureRow = props.titles[(rowLimit*2)+1]
-
+  
+  if (!props.titles) return <Errorbox options={["reload"]} title={"Servor error"} message={"There was a problem fetching Matt's awesome content from the server. (You're too hot to access this content)"}/>
   return (<>
     <Head>
       <title>Documentaries - Mattflix</title>

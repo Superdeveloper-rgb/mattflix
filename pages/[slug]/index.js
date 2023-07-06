@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 
-export default function detailsPage({ title, related, error }) {
+export default function DetailsPage({ title, related, error }) {
     const [animated, animate] = useState(false);
     const router = useRouter();
     let player = useRef(null);
@@ -42,7 +42,7 @@ export default function detailsPage({ title, related, error }) {
         {!!related.length ? <>
             <section className={rows.shelf}>
                 {related.map((item) => {
-                    return <Link href={item.slug}><a><ContentCard src={item.poster_url} /></a></Link>
+                    return <Link href={item.slug} key={item.title}><a><ContentCard src={item.poster_url} /></a></Link>
                 })}
             </section>
         </> : <p className={rows.rowTitle}>No other content like this, you found a unique gem!</p>}

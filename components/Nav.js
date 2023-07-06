@@ -1,5 +1,6 @@
 import styles from "../styles/nav.module.css"
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react";
 import { joinClasses, useAuth, useScreenSize } from "../lib/utils";
@@ -27,7 +28,7 @@ export default function Nav() {
     return (
         <nav className={transparency ? styles.mainNav : joinClasses(styles.mainNav, styles.scrolled)}>
             <Link href="/browse"><a style={{cursor: "pointer", display: "flex", alignItems: "center", height: "100%"}}>
-                <img src="/mattflix.png" className={styles.logo} />
+                <Image src="/mattflix.png" className={styles.logo} />
             </a></Link>
             <ol className={joinClasses(styles.linkContainer, (isOpen ? styles.open : ""))} onClick={()=>setOpen(prev => !prev)}>
                 {user ? (<>
@@ -35,7 +36,7 @@ export default function Nav() {
                 <Navlink href="/browse" nextLink>Browse</Navlink>
                 <Navlink href="/new" nextLink>New & Hot</Navlink>
                 <Navlink href="/documentaries" nextLink>Documentaries</Navlink>
-                <li><Link href="/profile"><a><img className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>
+                <li><Link href="/profile"><a><Image className={styles.userIcon} src={`https://avatars.dicebear.com/api/adventurer/${user.user_metadata.name || "luna"}.svg?r=50&translateY=7`} /></a></Link></li>
 
                 </>) : (
 

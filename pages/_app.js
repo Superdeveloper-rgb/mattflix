@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
     return () => {
       authListener.unsubscribe()
     }
-  }, [])
+  })
   async function handleAuthChange(event, session, action) {
     await fetch(`/api/auth?action=${action}`, {
       method: 'POST',
