@@ -14,7 +14,7 @@ export default function DetailsPage({ title, related, error }) {
     const [animated, animate] = useState(false);
     const router = useRouter();
     let player = useRef(null);
-    const { user } = useAuth();
+    const [ user ] = useAuth();
     function playVid() {
         player.current.play()
         animate(true);
