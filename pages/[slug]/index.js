@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import { useAuth } from "../../lib/utils";
 
 export default function DetailsPage({ title, related, error }) {
     const [animated, animate] = useState(false);
@@ -32,7 +33,7 @@ export default function DetailsPage({ title, related, error }) {
                 <div className={infoStyles.textWrapper}>
                     <h1 className={infoStyles.title}>{title.title}</h1>
                     <p className={infoStyles.description}>{title.summary}</p>
-                    <button onClick={playVid} className={infoStyles.watchLink}></button>
+                    {useAuth().user && <button onClick={playVid} className={infoStyles.watchLink}></button>}
                 </div>
                 <video style={{ display: "none" }} ref={player} />
             </div>

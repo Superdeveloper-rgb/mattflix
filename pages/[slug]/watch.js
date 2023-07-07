@@ -4,29 +4,12 @@ import prisma from "../../lib/prisma";
 import { makeSerializable } from "../../lib/utils";
 import styles from "../../styles/videoPlayer.module.css";
 import Head from "next/head";
+import supabase from "../../lib/supabaseClient";
 
 export default function Watch(props) {
     const router = useRouter()
     let [classes, setClasses] = useState(styles.video);
     useEffect(()=>setClasses([styles.video, styles.in].join(' ')), []) // add "in" class on page load
-    // let [backBtnClass, setBackBtnClass] = useState(["fas fa-arrow-left", styles.backArrow].join(' '));
-    // useEffect(() => {
-    //     let hideTimeout;
-    //     function showBackBtn(){
-    //         if(hideTimeout) clearTimeout(hideTimeout);
-    //         setBackBtnClass(["fas fa-arrow-left", styles.backArrow].join(' '))
-    //         hideTimeout = setTimeout(hideBackBtn, 2000);
-    //         setClasses([styles.video, styles.in].join(' '));
-    //     }
-    //     function hideBackBtn(){
-    //         setBackBtnClass(["fas fa-arrow-left", styles.backArrow, styles.hidden].join(' '))
-    //         setClasses([styles.video, styles.in, styles.nopointerevents].join(' '));
-    //     }
-    //     window.addEventListener("mouseout", hideBackBtn)
-    //     window.addEventListener("mouseover", showBackBtn)
-    //     window.addEventListener("mousemove", showBackBtn)
-    //     window.addEventListener("click", showBackBtn)
-    // })
     return (<>
         <Head>
             <title>Watching {props.title} on Mattflix</title>
@@ -38,6 +21,15 @@ export default function Watch(props) {
 }
 
 export async function getServerSideProps(context) {
+    const { user } = await supabase.auth.api.getUserByCookie(context.req);
+    if (!user) {
+      return {
+        redirect: {
+          destination: '/login',
+          permanent: false,
+        },
+      }
+    }
     const title = await prisma.content.findUnique({
         where: { slug: context.query.slug },
         select: {bunny_id: true, title: true}
