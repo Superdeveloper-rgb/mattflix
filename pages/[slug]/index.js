@@ -14,6 +14,7 @@ export default function DetailsPage({ title, related, error }) {
     const [animated, animate] = useState(false);
     const router = useRouter();
     let player = useRef(null);
+    const { user } = useAuth();
     function playVid() {
         player.current.play()
         animate(true);
@@ -33,7 +34,7 @@ export default function DetailsPage({ title, related, error }) {
                 <div className={infoStyles.textWrapper}>
                     <h1 className={infoStyles.title}>{title.title}</h1>
                     <p className={infoStyles.description}>{title.summary}</p>
-                    {useAuth().user && <button onClick={playVid} className={infoStyles.watchLink}></button>}
+                    {user && <button onClick={playVid} className={infoStyles.watchLink}></button>}
                 </div>
                 <video style={{ display: "none" }} ref={player} />
             </div>
