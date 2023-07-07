@@ -28,7 +28,7 @@ export default function Nav() {
     return (
         <nav className={transparency ? styles.mainNav : joinClasses(styles.mainNav, styles.scrolled)}>
             <Link href="/browse"><a style={{cursor: "pointer", display: "flex", alignItems: "center", height: "100%"}}>
-                <Image src="/mattflix.png" className={styles.logo} width={126} height={40}/>
+                {<Image src="/mattflix.png" className={styles.logo} width={126} height={40} style={{opacity: (router.pathname == "/" && transparency ) ? 0 : 1}}/>}
             </a></Link>
             <ol className={joinClasses(styles.linkContainer, (isOpen ? styles.open : ""))} onClick={()=>setOpen(prev => !prev)}>
                 {user ? (<>
